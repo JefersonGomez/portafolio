@@ -1,0 +1,91 @@
+{
+  "name": "Jeferson Bustamante — Portfolio",
+  "world": "civic-bureau-prospectus-late-modern",
+  "source": "src/index.css @theme",
+  "ramps": {
+    "ink": { "base": "#1b1547", "body": "#4b5165", "muted": "#686d84", "hairline": "#e6e7ee", "hairlineDeep": "#c9cbd9" },
+    "paper": { "ground": "#f7f7fa", "surface": "#ffffff" },
+    "violet": {
+      "wash": "#f0edfd",
+      "base": "#6b5ce7",
+      "deep": "#5a4bd6",
+      "active": "#2e2191"
+    },
+    "ribbon": { "teal": "#7fd8d0", "lilac": "#c9b8f0", "violet": "#5b4fd6" }
+  },
+  "elevation": {
+    "rule": "declared once, as a 1px hairline border",
+    "hairline": "1px solid #e6e7ee",
+    "shadows": []
+  },
+  "motion": {
+    "ease-prospectus": "cubic-bezier(0.25, 1, 0.5, 1)",
+    "ease-rise": "cubic-bezier(0.165, 0.84, 0.44, 1)",
+    "durations": { "control": "300ms", "reveal": "800ms" },
+    "authored": [
+      {
+        "name": "prospectus-rise",
+        "spec": "opacity 0 -> 1, translateY 24px -> 0, 800ms ease-rise, both",
+        "usage": "once, on the hero argument column"
+      },
+      {
+        "name": "ribbon-tilt",
+        "spec": "rotate(max 1.4deg) about 50% 100% + translateY(max 8px), 300ms ease-prospectus",
+        "usage": "pointer-driven; gated on prefers-reduced-motion and pointer:fine"
+      }
+    ]
+  },
+  "breakpoints": { "sm": "640px", "md": "768px", "lg": "1024px" },
+  "container": { "max": "84rem", "gutter": "24px", "gutterLg": "48px" },
+  "typography": {
+    "family": "General Sans",
+    "source": "https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600&display=swap",
+    "weights": [400, 500],
+    "trackingFloor": "-0.04em",
+    "displayCeiling": "5.5rem",
+    "tabularNums": true
+  },
+  "browserSurfaces": {
+    "selection": { "background": "#f0edfd", "color": "#2e2191" },
+    "focusVisible": { "outline": "2px solid #6b5ce7", "offset": "3px" },
+    "caret": "#6b5ce7",
+    "scrollbar": { "thumb": "#e6e7ee", "track": "#f7f7fa", "width": "10px" },
+    "underlineOffset": "0.25em"
+  },
+  "signature": {
+    "seals": {
+      "file": "src/components/Seal.jsx",
+      "variants": {
+        "SealMark": { "render": "28px", "aria": "hidden" },
+        "SealPersonal": { "render": "min(21rem, 72vw)", "aria": "img + label" },
+        "SealProject": { "render": "48px", "aria": "hidden" }
+      },
+      "note": "Replaces the client-logo row this world normally ships. There are no clients; faking one is forbidden by PRODUCT.md principle 2.",
+      "strokeRule": "Stroke widths are set for the rendered size, not the viewBox. A width of 4 in a 300 viewBox shown at 48px rasterizes to 0.5px and disappears."
+    },
+    "ribbon": {
+      "file": "src/components/Ribbon.jsx",
+      "composition": ["blurred halo", "band", "fold (multiply)", "specular (screen)", "leading edge"],
+      "note": "Specified bezier geometry with gradient fills. Never an imitated photograph."
+    }
+  },
+  "bans": [
+    "fabricated metrics, clients, employers, testimonials, or plausible-looking placeholder names",
+    "cards as page structure; nested cards",
+    "eyebrow or kicker above a heading",
+    "gradient text",
+    "section numbers",
+    "monospace as a costume for technical",
+    "shadow, glass, or backdrop-blur as decoration",
+    "a second type family",
+    "a link to a section that does not exist",
+    "illustration imitating a photograph"
+  ],
+  "openItems": [
+    "No render evidence exists: this harness has no browser. The finish review returned disposition recapture and binds nothing. Contrast, overflow, occlusion, and rasterization checks remain unverified against a real render.",
+    "Project names and years are unmistakable placeholders pending real repo data.",
+    "personalInfo.linkedin is empty pending a real profile URL.",
+    "techStack is emptied pending confirmation; the previous values came from the template, not from the author.",
+    "Bilingual es/en is confirmed product truth in PRODUCT.md but out of scope for this pass."
+  ]
+}

@@ -1,0 +1,139 @@
+@import url('https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  /* Papel y tinta */
+  --color-ground: #f7f7fa;
+  --color-surface: #ffffff;
+  --color-ink: #1b1547;
+  --color-body: #4b5165;
+  --color-muted: #686d84;
+  --color-hairline: #e6e7ee;
+  --color-hairline-deep: #c9cbd9;
+
+  /* Violeta: el único color de acción, racionado */
+  --color-violet: #6b5ce7;
+  --color-violet-deep: #5a4bd6;
+  --color-violet-active: #2e2191;
+  --color-violet-wash: #f0edfd;
+
+  /* Cinta de luz */
+  --color-ribbon-teal: #7fd8d0;
+  --color-ribbon-lilac: #c9b8f0;
+  --color-ribbon-violet: #5b4fd6;
+
+  --font-sans: 'General Sans', ui-sans-serif, system-ui, sans-serif;
+
+  --ease-prospectus: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-rise: cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+/* Todo lo de abajo vive en @layer base a propósito.
+   El CSS sin capa le gana al CSS en capa en la cascada, sin importar la
+   especificidad: una regla suelta aquí pisa cada px-*, mt-* y mx-auto que
+   Tailwind genera dentro de @layer utilities. El reset universal que había
+   antes hacía exactamente eso — y el preflight de Tailwind ya lo cubre, así
+   que sobraba. */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    background: var(--color-ground);
+    /* Los años grabados en los sellos se alinean en columna */
+    font-variant-numeric: tabular-nums;
+  }
+
+  body {
+    min-width: 320px;
+    background: var(--color-ground);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-weight: 400;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  a {
+    text-underline-offset: 0.25em;
+    text-decoration-thickness: 1px;
+  }
+
+  button,
+  a {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Las superficies que no dibujamos también llevan el diseño */
+
+  ::selection {
+    background: var(--color-violet-wash);
+    color: var(--color-violet-active);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-violet);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--color-ground);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-hairline);
+    border: 3px solid var(--color-ground);
+    border-radius: 99px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-hairline-deep);
+  }
+
+  * {
+    scrollbar-color: var(--color-hairline) var(--color-ground);
+    scrollbar-width: thin;
+  }
+
+  input,
+  textarea {
+    caret-color: var(--color-violet);
+    font-family: inherit;
+  }
+}
+
+@layer components {
+  /* El único momento autorizado: una subida de 24px en 0.8s */
+  @keyframes prospectus-rise {
+    from {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  .rise {
+    animation: prospectus-rise 0.8s var(--ease-rise) both;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

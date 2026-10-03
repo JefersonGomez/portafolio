@@ -3,6 +3,8 @@ import Hero from './components/Hero';
 import Projects from './components/Projects';
 import Stack from './components/Stack';
 import About from './components/About';
+import Education from './components/Education';
+import Contact from './components/Contact';
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
         <About />
         <Projects />
         <Stack />
+        <Education />
+        <Contact />
       </main>
     </div>
   );

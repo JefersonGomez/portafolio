@@ -29,3 +29,6 @@ dist-ssr
 .impeccable/config.local.json
 .impeccable/questions/
 .impeccable/worlds/
+
+# Capturas privadas (IDs de credenciales)
+references/certificaciones.png

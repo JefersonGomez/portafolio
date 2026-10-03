@@ -41,7 +41,16 @@ const Hero = () => (
             </a>
 
             <a
-              href={`mailto:${personalInfo.email}`}
+              href="#contact"
+              onClick={(e) => {
+                // Baja a Contacto y después abre el correo. El mailto va con retraso:
+                // si sale en el mismo clic, el navegador corta el scroll suave.
+                e.preventDefault();
+                document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                setTimeout(() => {
+                  window.location.href = `mailto:${personalInfo.email}`;
+                }, 800);
+              }}
               className="inline-flex items-center rounded-lg border border-violet bg-surface px-6 py-3.5 text-[0.9375rem] font-medium text-violet transition-colors duration-300 ease-prospectus hover:bg-violet-wash"
             >
               Escribime

@@ -10,12 +10,13 @@ export const personalInfo = {
   location: 'Heredia, Costa Rica',
   availability: 'Disponible para trabajo local y remoto',
   email: 'jefersonbustamantegomez@gmail.com',
+  phone: '+506 6171 8236',
+  contactLocation: 'Costa Rica · remoto',
   github: 'https://github.com/JefersonGomez',
   photo: '/foto-perfil/foto-de-perfil.jpeg',
   photoWidth: 972,
   photoHeight: 1296,
-  // TODO: pegar el perfil real. Mientras esté vacío, el enlace no se renderiza.
-  linkedin: '',
+  linkedin: 'https://www.linkedin.com/in/jeferson-bustamante-gomez-86853a297/',
 };
 
 // Solo destinos que existen de verdad: un enlace que no lleva a ningún lado es
@@ -24,63 +25,74 @@ export const navLinks = [
   { label: 'Sobre mí', href: '#about' },
   { label: 'Proyectos', href: '#projects' },
   { label: 'Stack', href: '#stack' },
+  { label: 'Formación', href: '#education' },
+  { label: 'Contacto', href: '#contact' },
 ];
 
-// Stack declarado por Jeferson. `level` es honesto a propósito: 3 = sólido,
-// 2 = intermedio, 1 = básico. Un nivel que no se puede sostener en una entrevista
-// es peor que no listar la tecnología.
+// Stack declarado por Jeferson, agrupado por capa.
+export const education = {
+  school: 'Universidad Nacional de Costa Rica',
+  degree: 'Ingeniería en Sistemas de Información',
+  status: 'Finalizando tercer año',
+};
+
+// Insignias de LinkedIn. Todas enlazan a la página de certificaciones del perfil,
+// donde está el botón "Mostrar credencial" de cada una.
+export const certificationsUrl =
+  'https://www.linkedin.com/in/jeferson-bustamante-gomez-86853a297/details/certifications/';
+
+export const certifications = [
+  { name: 'AWS Cloud Quest: Cloud Practitioner', issuer: 'Amazon Web Services', year: '2026', icon: 'FaAws' },
+  { name: 'Claude Academy: Claude 101', issuer: 'Anthropic', year: '2026', icon: 'SiAnthropic' },
+  { name: 'Backend Development and APIs', issuer: 'freeCodeCamp', year: '2026', icon: 'SiFreecodecamp' },
+];
+
 export const techStack = [
   {
     group: 'Lenguajes',
     items: [
-      { name: 'TypeScript', icon: 'SiTypescript', level: 3 },
-      { name: 'JavaScript', icon: 'SiJavascript', level: 3 },
-      { name: 'Go', icon: 'SiGo', level: 1 },
+      { name: 'TypeScript', icon: 'SiTypescript' },
+      { name: 'JavaScript', icon: 'SiJavascript' },
+      { name: 'Go', icon: 'SiGo' },
     ],
   },
   {
     group: 'Frameworks',
     items: [
-      { name: 'Express', icon: 'SiExpress', level: 3 },
-      { name: 'Gin', icon: 'SiGin', level: 1 },
+      { name: 'Express', icon: 'SiExpress' },
+      { name: 'Gin', icon: 'SiGin' },
     ],
   },
   {
     group: 'Bases de datos',
-    items: [{ name: 'PostgreSQL', icon: 'SiPostgresql', level: 3 }],
+    items: [{ name: 'PostgreSQL', icon: 'SiPostgresql' }],
   },
   {
     group: 'ORM',
     items: [
-      { name: 'Prisma', icon: 'SiPrisma', level: 3 },
-      { name: 'GORM', icon: 'SiGo', level: 1 },
+      { name: 'Prisma', icon: 'SiPrisma' },
+      { name: 'GORM', icon: 'SiGo' },
     ],
   },
   {
     group: 'Infraestructura',
     items: [
-      { name: 'Docker', icon: 'SiDocker', level: 2 },
-      { name: 'AWS', icon: 'FaAws', level: 2 },
+      { name: 'Docker', icon: 'SiDocker' },
+      { name: 'AWS', icon: 'FaAws' },
     ],
   },
   {
     group: 'Control de versiones',
     items: [
-      { name: 'Git', icon: 'SiGit', level: 3 },
-      { name: 'GitHub', icon: 'SiGithub', level: 3 },
+      { name: 'Git', icon: 'SiGit' },
+      { name: 'GitHub', icon: 'SiGithub' },
     ],
   },
   {
     group: 'Inteligencia artificial',
-    items: [{ name: 'Claude Code', icon: 'SiClaude', level: 3 }],
+    items: [{ name: 'Claude Code', icon: 'SiClaude' }],
   },
 ];
-
-export const techLevels = {
-  3: 'Sólido',
-  2: 'Intermedio',
-  1: 'Básico',
-};
 
 // Proyectos propios, los tres públicos en GitHub. `figure` apunta a una captura
 // real; cuando es null el componente dibuja la lámina grabada del proyecto.

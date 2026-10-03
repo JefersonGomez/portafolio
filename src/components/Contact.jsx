@@ -41,7 +41,7 @@ const Contact = () => {
   return (
     <section id="contact" className="border-t border-hairline">
       <div className="mx-auto max-w-[84rem] px-6 py-24 lg:px-12 lg:py-32">
-        <div className="grid gap-14 lg:grid-cols-12 lg:gap-16">
+        <div className="grid grid-cols-1 gap-14 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-6">
             <h2 className="max-w-[16ch] text-[clamp(2rem,4vw,3.25rem)] font-medium leading-[1.1] tracking-[-0.03em] text-ink">
               ¿Construimos algo <span className="text-violet">juntos?</span>
@@ -53,9 +53,9 @@ const Contact = () => {
             <div className="mt-10 flex flex-wrap items-center gap-3">
               <a
                 href={`mailto:${personalInfo.email}`}
-                className="inline-flex items-center gap-2.5 rounded-lg bg-violet px-6 py-3.5 text-[0.9375rem] font-medium text-white transition-colors duration-300 ease-prospectus hover:bg-violet-deep active:bg-violet-active"
+                className="inline-flex max-w-full items-center gap-2.5 rounded-lg bg-violet px-6 py-3.5 [overflow-wrap:anywhere] text-[0.9375rem] font-medium text-white transition-colors duration-300 ease-prospectus hover:bg-violet-deep active:bg-violet-active"
               >
-                <Mail size={18} strokeWidth={1.75} aria-hidden="true" />
+                <Mail size={18} strokeWidth={1.75} aria-hidden="true" className="shrink-0" />
                 {personalInfo.email}
               </a>
               <button

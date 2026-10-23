@@ -94,7 +94,7 @@ const Projects = () => (
                   rel="noopener noreferrer"
                   className="group mt-8 inline-flex items-center gap-2 text-[0.9375rem] font-medium text-violet transition-colors duration-300 ease-prospectus hover:text-violet-deep"
                 >
-                  Ver el código
+                  Ver demo
                   <ArrowUpRight
                     size={17}
                     strokeWidth={1.75}

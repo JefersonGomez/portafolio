@@ -94,13 +94,13 @@ export const techStack = [
   },
 ];
 
-// Proyectos propios, los tres públicos en GitHub. `figure` apunta a una captura
+// Proyectos propios; `url` lleva a la demo desplegada. `figure` apunta a una captura
 // real; cuando es null el componente dibuja la lámina grabada del proyecto.
 export const projects = [
   {
     id: 'studyflow',
     name: 'StudyFlow',
-    url: 'https://github.com/JefersonGomez/studyflow-backend',
+    url: 'https://studyflow-frontend-mocha.vercel.app/dashboard',
     year: '2026',
     lastCommit: 'julio 2026',
     commits: 25,
@@ -116,7 +116,7 @@ export const projects = [
   {
     id: 'inventario',
     name: 'Stockly',
-    url: 'https://github.com/JefersonGomez/api-inventario',
+    url: 'https://stockly-jeferson.duckdns.org/login',
     year: '2026',
     lastCommit: 'septiembre 2026',
     description:
@@ -131,7 +131,7 @@ export const projects = [
   {
     id: 'techrag',
     name: 'TechRAG Assistant',
-    url: 'https://github.com/JefersonGomez/RAG-Techrag-Assistant',
+    url: 'https://rag.jefersonbustamante.duckdns.org/#/',
     year: '2026',
     lastCommit: 'octubre 2026',
     commits: 28,

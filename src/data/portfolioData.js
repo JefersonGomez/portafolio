@@ -122,7 +122,7 @@ export const projects = [
     description:
       'Sistema de inventario para empresas con punto de venta incluido, sistema contable y facturación. Autenticación por roles, control de stock con trazabilidad de movimientos y reportes. Sigue en desarrollo.',
     stack: ['TypeScript', 'Express', 'PostgreSQL', 'Prisma', 'Docker', 'Zod', 'Jest'],
-    figure: '/proyectos/inventario.png',
+    figure: '/proyectos/stockly.png',
     figureWidth: 1040,
     figureHeight: 720,
     figureAlt:

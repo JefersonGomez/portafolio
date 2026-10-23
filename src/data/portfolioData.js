@@ -13,9 +13,9 @@ export const personalInfo = {
   phone: '+506 6171 8236',
   contactLocation: 'Costa Rica · remoto',
   github: 'https://github.com/JefersonGomez',
-  photo: '/foto-perfil/foto-de-perfil.jpeg',
-  photoWidth: 972,
-  photoHeight: 1296,
+  photo: '/foto-perfil/foto1.jpg',
+  photoWidth: 1254,
+  photoHeight: 857,
   linkedin: 'https://www.linkedin.com/in/jeferson-bustamante-gomez-86853a297/',
 };
 
@@ -103,6 +103,7 @@ export const projects = [
     url: 'https://github.com/JefersonGomez/studyflow-backend',
     year: '2026',
     lastCommit: 'julio 2026',
+    commits: 25,
     description:
       'API REST para una plataforma de gestión académica: materias, tareas, notas, eventos y pizarra. Sube PDFs y les extrae el texto, y la capa de IA corre local con Ollama en vez de depender de un servicio externo.',
     stack: ['Go', 'Gin', 'PostgreSQL', 'GORM', 'Ollama', 'JWT', 'Google OAuth', 'Swagger'],
@@ -119,24 +120,28 @@ export const projects = [
     year: '2026',
     lastCommit: 'septiembre 2026',
     description:
-      'Backend REST de inventario para una pequeña empresa: autenticación por roles, CRUD de productos y categorías, control de stock con trazabilidad de movimientos, órdenes de compra y reportes.',
+      'Sistema de inventario para empresas con punto de venta incluido, sistema contable y facturación. Autenticación por roles, control de stock con trazabilidad de movimientos y reportes. Sigue en desarrollo.',
     stack: ['TypeScript', 'Express', 'PostgreSQL', 'Prisma', 'Docker', 'Zod', 'Jest'],
     figure: '/proyectos/inventario.png',
-    figureWidth: 1883,
-    figureHeight: 914,
+    figureWidth: 1040,
+    figureHeight: 720,
     figureAlt:
-      'Panel de InventarioPro con alertas de stock, valor del inventario y gráficos de movimientos por categoría.',
+      'Pantalla de inicio de sesión de Stockly, con acceso de demostración como administrador o como cajero.',
   },
   {
     id: 'techrag',
     name: 'TechRAG Assistant',
     url: 'https://github.com/JefersonGomez/RAG-Techrag-Assistant',
     year: '2026',
-    lastCommit: 'septiembre 2026',
+    lastCommit: 'octubre 2026',
+    commits: 28,
     description:
       'Sistema RAG para entender bases de código y documentación técnica. Ingesta un repositorio, lo parte en fragmentos con metadatos, los indexa como embeddings y responde preguntas con el contexto que recupera.',
     stack: ['TypeScript', 'LangChain', 'pgvector', 'Hugging Face', 'Groq', 'Redis', 'Prisma'],
-    figure: null,
-    figureAlt: null,
+    figure: '/proyectos/RAG.png',
+    figureWidth: 1200,
+    figureHeight: 700,
+    figureAlt:
+      'Portada de TechRAG Assistant: preguntas sobre un repositorio respondidas citando el archivo y las líneas de origen.',
   },
 ];

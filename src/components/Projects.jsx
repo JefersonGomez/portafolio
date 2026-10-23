@@ -83,6 +83,7 @@ const Projects = () => (
                         aria-hidden="true"
                       />
                       {project.lastCommit}
+                      {project.commits && ` · ${project.commits} commits`}
                     </dd>
                   </div>
                 </dl>

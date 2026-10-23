@@ -115,7 +115,7 @@ export const projects = [
   },
   {
     id: 'inventario',
-    name: 'Sistema de inventario',
+    name: 'Stockly',
     url: 'https://github.com/JefersonGomez/api-inventario',
     year: '2026',
     lastCommit: 'septiembre 2026',

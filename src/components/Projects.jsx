@@ -88,19 +88,27 @@ const Projects = () => (
                   </div>
                 </dl>
 
-                <a
-                  href={project.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group mt-8 inline-flex items-center gap-2 text-[0.9375rem] font-medium text-violet transition-colors duration-300 ease-prospectus hover:text-violet-deep"
-                >
-                  Ver demo
-                  <ArrowUpRight
-                    size={17}
-                    strokeWidth={1.75}
-                    className="transition-transform duration-300 ease-prospectus group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                  />
-                </a>
+                <div className="mt-8 flex flex-wrap gap-x-8 gap-y-3">
+                  {[
+                    ['Ver demo', project.url],
+                    ['Ver código', project.repo],
+                  ].map(([label, href]) => (
+                    <a
+                      key={label}
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group inline-flex items-center gap-2 text-[0.9375rem] font-medium text-violet transition-colors duration-300 ease-prospectus hover:text-violet-deep"
+                    >
+                      {label}
+                      <ArrowUpRight
+                        size={17}
+                        strokeWidth={1.75}
+                        className="transition-transform duration-300 ease-prospectus group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                      />
+                    </a>
+                  ))}
+                </div>
               </div>
             </article>
           </li>

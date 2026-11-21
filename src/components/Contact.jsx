@@ -143,7 +143,7 @@ const Contact = () => {
                 href={href}
                 target={href.startsWith('http') ? '_blank' : undefined}
                 rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                className="group flex h-full items-center gap-4 rounded-xl border border-hairline bg-surface/70 px-5 py-4 text-left backdrop-blur transition-[border-color,transform] duration-300 ease-prospectus hover:-translate-y-1 hover:border-cyan"
+                className="group flex h-full items-center gap-4 rounded-xl border border-hairline bg-surface/70 px-5 py-4 text-left transition-[border-color,transform] duration-300 ease-prospectus hover:-translate-y-1 hover:border-cyan"
               >
                 <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-hairline bg-ground text-muted transition-colors duration-300 ease-prospectus group-hover:border-cyan group-hover:text-cyan">
                   <Icon size={19} aria-hidden="true" />

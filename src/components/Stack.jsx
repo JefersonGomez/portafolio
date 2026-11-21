@@ -99,7 +99,7 @@ const Stack = () => {
         <div className="mt-16 grid items-center gap-14 lg:mt-20 lg:grid-cols-12 lg:gap-10">
           {/* El robotito en su computadora */}
           <div className={`relative mx-auto w-[min(22rem,80vw)] lg:col-span-4 lg:w-full ${seen ? 'is-seen' : ''}`}>
-            <div className="sbot-bubble absolute -top-6 right-0 z-10 rounded-2xl rounded-br-sm border border-hairline-deep bg-surface/90 px-4 py-2.5 font-mono text-sm text-ink shadow-lg backdrop-blur sm:-right-4">
+            <div className="sbot-bubble absolute -top-6 right-0 z-10 rounded-2xl rounded-br-sm border border-hairline-deep bg-surface/90 px-4 py-2.5 font-mono text-sm text-ink shadow-lg sm:-right-4">
               <span className="text-cyan">{'> '}</span>este es mi stack
               <span className="sbot-caret ml-0.5 inline-block h-3.5 w-1.5 translate-y-0.5 bg-cyan" aria-hidden="true" />
             </div>
@@ -110,7 +110,7 @@ const Stack = () => {
 
           {/* Editor con el stack como objeto */}
           <div className={`lg:col-span-8 ${seen ? 'is-seen' : ''}`}>
-            <div className="sbot-editor overflow-hidden rounded-xl border border-hairline bg-surface/80 shadow-[0_30px_60px_-30px_rgba(0,0,0,0.8)] backdrop-blur">
+            <div className="sbot-editor overflow-hidden rounded-xl border border-hairline bg-surface/80 shadow-[0_30px_60px_-30px_rgba(0,0,0,0.8)]">
               <div className="flex items-center gap-3 border-b border-hairline px-4 py-2.5">
                 <span className="flex gap-1.5" aria-hidden="true">
                   <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f57]/80" />
@@ -145,7 +145,7 @@ const Stack = () => {
                           <ul className="flex flex-wrap items-center gap-2" aria-label={row.group}>
                             {row.items.map((item) => {
                               const Mark = MARKS[item.icon];
-                              const delay = `${600 + index++ * 90}ms`;
+                              const delay = `${300 + index++ * 45}ms`;
                               return (
                                 <li
                                   key={item.name}

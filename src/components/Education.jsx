@@ -30,7 +30,7 @@ const Education = () => (
             la nube, las bases de datos y la IA.
           </p>
 
-          <div className="mt-10 flex items-start gap-5 rounded-xl border border-hairline bg-surface/70 px-6 py-6 backdrop-blur lg:px-8">
+          <div className="mt-10 flex items-start gap-5 rounded-xl border border-hairline bg-surface/70 px-6 py-6 lg:px-8">
             <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg border border-hairline-deep bg-ground text-cyan">
               <GraduationCap size={24} strokeWidth={1.75} aria-hidden="true" />
             </span>

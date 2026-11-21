@@ -148,9 +148,9 @@ export const projects = [
       'Sistema de inventario para empresas con punto de venta incluido, sistema contable y facturación. Autenticación por roles, control de stock con trazabilidad de movimientos y reportes.',
     highlights: ['Roles admin y cajero', 'Trazabilidad de stock', 'Demo con datos reales'],
     stack: ['TypeScript', 'Express', 'PostgreSQL', 'Prisma', 'Docker', 'Zod', 'Jest'],
-    figure: '/proyectos/Cubivo.png',
-    figureWidth: 1751,
-    figureHeight: 883,
+    figure: '/proyectos/cubivo.jpg',
+    figureWidth: 1400,
+    figureHeight: 706,
     figureAlt:
       'Pantalla de inicio de sesión de Cubivo, con acceso de demostración como administrador o como cajero.',
   },

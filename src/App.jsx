@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Projects from './components/Projects';
@@ -7,6 +8,22 @@ import Education from './components/Education';
 import Contact from './components/Contact';
 
 function App() {
+  // Pausa las animaciones en bucle de las secciones que no están en pantalla.
+  // Usa un atributo (no className) para no pelear con React; el CSS está en index.css.
+  useEffect(() => {
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(({ target, isIntersecting }) => {
+          if (isIntersecting) target.removeAttribute('data-offscreen');
+          else target.setAttribute('data-offscreen', '');
+        });
+      },
+      { rootMargin: '100px 0px' },
+    );
+    document.querySelectorAll('main > section').forEach((s) => io.observe(s));
+    return () => io.disconnect();
+  }, []);
+
   return (
     <div className="min-h-screen bg-ground text-ink">
       <a

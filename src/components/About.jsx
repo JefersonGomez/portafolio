@@ -40,10 +40,10 @@ const About = () => (
             </div>
 
             {/* Chips flotando alrededor */}
-            <span className="portrait-chip absolute -left-4 top-[14%] rounded-full border border-hairline-deep bg-surface/90 px-3 py-1.5 font-mono text-xs text-ink shadow-lg backdrop-blur sm:-left-10">
+            <span className="portrait-chip absolute -left-4 top-[14%] rounded-full border border-hairline-deep bg-surface/90 px-3 py-1.5 font-mono text-xs text-ink shadow-lg sm:-left-10">
               <span className="text-cyan">{'</>'}</span> full-stack
             </span>
-            <span className="portrait-chip portrait-chip--late absolute -right-2 bottom-[12%] rounded-full border border-hairline-deep bg-surface/90 px-3 py-1.5 font-mono text-xs text-ink shadow-lg backdrop-blur sm:-right-8">
+            <span className="portrait-chip portrait-chip--late absolute -right-2 bottom-[12%] rounded-full border border-hairline-deep bg-surface/90 px-3 py-1.5 font-mono text-xs text-ink shadow-lg sm:-right-8">
               <span className="text-violet-active">✦</span> + IA
             </span>
           </div>

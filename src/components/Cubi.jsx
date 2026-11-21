@@ -99,7 +99,7 @@ const Cubi = ({ message, mood = 'idle', visible }) => {
     >
       <p
         key={message}
-        className="cubi-bubble pointer-events-auto mb-14 sm:mb-28 max-w-[11rem] rounded-2xl rounded-br-sm border border-hairline-deep bg-surface/95 px-3 py-2 text-xs leading-snug sm:px-3.5 sm:py-2.5 text-ink shadow-xl backdrop-blur sm:max-w-[15rem] sm:text-sm"
+        className="cubi-bubble pointer-events-auto mb-14 sm:mb-28 max-w-[11rem] rounded-2xl rounded-br-sm border border-hairline-deep bg-surface/95 px-3 py-2 text-xs leading-snug sm:px-3.5 sm:py-2.5 text-ink shadow-xl sm:max-w-[15rem] sm:text-sm"
         aria-live="polite"
       >
         {message}

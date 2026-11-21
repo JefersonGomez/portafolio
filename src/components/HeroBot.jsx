@@ -12,7 +12,7 @@ const HeroBot = ({ className = '' }) => (
     className={`bot group block [perspective:900px] ${className}`}
   >
     {/* Globito con el enlace */}
-    <span className="bot-bubble absolute -left-10 top-[6%] z-10 flex items-center gap-2 whitespace-nowrap rounded-full border border-hairline-deep bg-surface/90 px-3.5 py-1.5 font-mono text-xs text-ink shadow-lg backdrop-blur transition-colors duration-300 group-hover:border-cyan group-hover:text-cyan">
+    <span className="bot-bubble absolute -left-10 top-[6%] z-10 flex items-center gap-2 whitespace-nowrap rounded-full border border-hairline-deep bg-surface/90 px-3.5 py-1.5 font-mono text-xs text-ink shadow-lg transition-colors duration-300 group-hover:border-cyan group-hover:text-cyan">
       <FaGithub size={14} aria-hidden="true" />
       mi código
     </span>

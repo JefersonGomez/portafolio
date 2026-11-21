@@ -27,7 +27,7 @@ const Navbar = () => {
     <header
       className={`sticky top-0 z-50 transition-colors duration-300 ease-prospectus ${
         isScrolled
-          ? 'border-b border-hairline bg-ground/80 backdrop-blur-md'
+          ? 'border-b border-hairline bg-ground/95 sm:bg-ground/80 sm:backdrop-blur-md'
           : 'border-b border-transparent bg-ground'
       }`}
     >

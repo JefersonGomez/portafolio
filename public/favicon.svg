@@ -1,8 +1,32 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300">
-  <rect width="300" height="300" rx="56" fill="#f7f7fa"/>
-  <g fill="none" stroke="#1b1547" stroke-linejoin="round">
-    <circle cx="150" cy="150" r="118" stroke-width="12"/>
-    <path d="M 88 176 L 116 141 L 133 159 L 150 122 L 172 155 L 190 147 L 212 176" stroke-width="13"/>
-    <line x1="92" y1="200" x2="208" y2="200" stroke-width="12"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <defs>
+    <linearGradient id="f" x1="0" y1="0" x2="0.4" y2="1">
+      <stop offset="0%" stop-color="#c9c2ff"/>
+      <stop offset="100%" stop-color="#8f80f5"/>
+    </linearGradient>
+    <linearGradient id="t" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#bff3fb"/>
+      <stop offset="100%" stop-color="#66d9ed"/>
+    </linearGradient>
+    <linearGradient id="s" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#6a5ae6"/>
+      <stop offset="100%" stop-color="#4a3cc4"/>
+    </linearGradient>
+  </defs>
+  <rect width="120" height="120" rx="26" fill="#0f0f12"/>
+  <g stroke-linejoin="round" stroke-width="7">
+    <path d="M94 40 L106 28 L106 92 L94 106 Z" fill="url(#s)" stroke="url(#s)"/>
+    <path d="M18 40 L32 26 L106 26 L94 40 Z" fill="url(#t)" stroke="url(#t)"/>
+    <rect x="14" y="38" width="80" height="72" rx="10" fill="url(#f)" stroke="url(#f)"/>
   </g>
+  <path d="M62 27 Q62 18 64 12" stroke="#2fd4a0" stroke-width="4" stroke-linecap="round" fill="none"/>
+  <path d="M64 13 Q53 4 46 11 Q55 18 64 13 Z" fill="#5ee6b4"/>
+  <path d="M64 13 Q73 2 82 8 Q75 18 64 13 Z" fill="#5ee6b4"/>
+  <ellipse cx="41" cy="70" rx="7" ry="9" fill="#1b1547"/>
+  <ellipse cx="67" cy="70" rx="7" ry="9" fill="#1b1547"/>
+  <circle cx="43.5" cy="66.5" r="2.8" fill="#fff"/>
+  <circle cx="69.5" cy="66.5" r="2.8" fill="#fff"/>
+  <ellipse cx="28" cy="84" rx="6" ry="3.5" fill="#ff8fb8" opacity="0.7"/>
+  <ellipse cx="80" cy="84" rx="6" ry="3.5" fill="#ff8fb8" opacity="0.7"/>
+  <path d="M47 86 Q54 93 61 86" stroke="#1b1547" stroke-width="4" stroke-linecap="round" fill="none"/>
 </svg>

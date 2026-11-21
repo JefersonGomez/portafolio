@@ -1,21 +1,25 @@
 @import url('https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Roboto+Mono:wght@400;500&display=swap');
 @import "tailwindcss";
 
 @theme {
-  /* Papel y tinta */
-  --color-ground: #f7f7fa;
-  --color-surface: #ffffff;
-  --color-ink: #1b1547;
-  --color-body: #4b5165;
-  --color-muted: #686d84;
-  --color-hairline: #e6e7ee;
-  --color-hairline-deep: #c9cbd9;
+  /* Noche: fondo casi negro, superficies apenas más claras */
+  --color-ground: #0f0f12;
+  --color-surface: #17161c;
+  --color-ink: #f4f4f7;
+  --color-body: #a8a8b8;
+  --color-muted: #75748a;
+  --color-hairline: #26252e;
+  --color-hairline-deep: #3a3946;
 
-  /* Violeta: el único color de acción, racionado */
-  --color-violet: #6b5ce7;
-  --color-violet-deep: #5a4bd6;
-  --color-violet-active: #2e2191;
-  --color-violet-wash: #f0edfd;
+  /* Violeta: el color de acción, avivado para leerse sobre oscuro */
+  --color-violet: #7c6cf2;
+  --color-violet-deep: #6a5ae6;
+  --color-violet-active: #b3a8ff;
+  --color-violet-wash: #1d1a33;
+
+  /* Cian: acento de código (los // del nav, el "+ IA" del titular) */
+  --color-cyan: #66d9ed;
 
   /* Cinta de luz */
   --color-ribbon-teal: #7fd8d0;
@@ -23,6 +27,8 @@
   --color-ribbon-violet: #5b4fd6;
 
   --font-sans: 'General Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Poppins', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'Roboto Mono', ui-monospace, monospace;
 
   --ease-prospectus: cubic-bezier(0.25, 1, 0.5, 1);
   --ease-rise: cubic-bezier(0.165, 0.84, 0.44, 1);
@@ -66,8 +72,8 @@
   /* Las superficies que no dibujamos también llevan el diseño */
 
   ::selection {
-    background: var(--color-violet-wash);
-    color: var(--color-violet-active);
+    background: var(--color-violet);
+    color: #ffffff;
   }
 
   :focus-visible {
@@ -224,4 +230,471 @@
     transform: scale(1.18) rotate(-8deg);
     color: var(--color-violet);
   }
+}
+
+/* Mascota del hero: entrada en 3D, flotación, parpadeo y saludo */
+@layer components {
+  @keyframes bot-enter {
+    0% {
+      opacity: 0;
+      transform: translateY(60px) rotateY(-70deg) rotateX(20deg) scale(0.6);
+    }
+    60% {
+      opacity: 1;
+      transform: translateY(-8px) rotateY(10deg) rotateX(-4deg) scale(1.04);
+    }
+    100% {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @keyframes bot-float {
+    0%, 100% { transform: translateY(0) rotateY(-10deg) rotateZ(-2deg); }
+    50% { transform: translateY(-14px) rotateY(10deg) rotateZ(2deg); }
+  }
+
+  @keyframes bot-shadow {
+    0%, 100% { transform: scaleX(1); opacity: 0.9; }
+    50% { transform: scaleX(0.75); opacity: 0.5; }
+  }
+
+  @keyframes bot-blink {
+    0%, 92%, 100% { transform: scaleY(1); }
+    95% { transform: scaleY(0.1); }
+  }
+
+  @keyframes bot-wave {
+    0%, 100% { transform: rotate(0deg); }
+    20% { transform: rotate(-18deg); }
+    40% { transform: rotate(10deg); }
+    60% { transform: rotate(-14deg); }
+    80% { transform: rotate(6deg); }
+  }
+
+  @keyframes bot-antenna {
+    0%, 100% { opacity: 0.4; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.25); }
+  }
+
+  @keyframes bot-bubble {
+    from { opacity: 0; transform: translateY(8px) scale(0.8); }
+    to { opacity: 1; transform: none; }
+  }
+
+  .bot { position: relative; }
+
+  .bot-enter {
+    transform-style: preserve-3d;
+    animation: bot-enter 1.4s cubic-bezier(0.34, 1.4, 0.64, 1) 0.5s both;
+  }
+
+  .bot-float {
+    transform-style: preserve-3d;
+    animation: bot-float 6s ease-in-out 1.9s infinite;
+    transition: filter 0.4s var(--ease-prospectus);
+    filter: drop-shadow(0 18px 30px color-mix(in srgb, var(--color-violet) 35%, transparent));
+  }
+
+  .bot:hover .bot-float {
+    filter: drop-shadow(0 18px 36px color-mix(in srgb, var(--color-cyan) 45%, transparent));
+  }
+
+  .bot-shadow { animation: bot-shadow 6s ease-in-out 1.9s infinite; }
+
+  .bot-eyes {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: bot-blink 4.5s ease-in-out 2.4s infinite;
+  }
+
+  .bot-wave {
+    transform-box: view-box;
+    transform-origin: 168px 166px;
+    animation: bot-wave 1.6s ease-in-out 1.9s 2;
+  }
+
+  .bot:hover .bot-wave { animation: bot-wave 1.6s ease-in-out infinite; }
+
+  .bot-antenna {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: bot-antenna 2.2s ease-in-out infinite;
+  }
+
+  .bot-bubble { animation: bot-bubble 0.6s var(--ease-prospectus) 2.2s both; }
+}
+
+/* Títulos de sección: misma voz que el titular del hero */
+@layer components {
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.9rem, 4vw, 3.4rem);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: 0.005em;
+    text-transform: uppercase;
+    color: var(--color-ink);
+    text-shadow: 1px 3px 11px rgba(0, 0, 0, 0.3);
+  }
+
+  .section-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.9375rem;
+    color: var(--color-body);
+  }
+}
+
+/* Retrato de "Sobre mí": anillo de gradiente que gira y chips que flotan */
+@layer components {
+  @keyframes portrait-spin {
+    to { transform: rotate(360deg); }
+  }
+
+  @keyframes portrait-chip {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  .portrait-ring {
+    background: conic-gradient(
+      from 0deg,
+      var(--color-violet),
+      var(--color-cyan),
+      transparent 40%,
+      var(--color-violet) 70%,
+      var(--color-cyan),
+      var(--color-violet)
+    );
+    filter: blur(1px);
+    animation: portrait-spin 12s linear infinite;
+  }
+
+  .portrait-ring::after {
+    content: '';
+    position: absolute;
+    inset: -14px;
+    border-radius: 9999px;
+    background: inherit;
+    filter: blur(28px);
+    opacity: 0.35;
+  }
+
+  .portrait-chip { animation: portrait-chip 5s ease-in-out infinite; }
+  .portrait-chip--late { animation-delay: -2.5s; }
+}
+
+/* Stack: el robotito tecleando en su computadora */
+@layer components {
+  @keyframes sbot-type {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(5px); }
+  }
+
+  @keyframes sbot-bob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(3px); }
+  }
+
+  @keyframes sbot-glyph {
+    0% { opacity: 0; transform: translateY(20px) scale(0.6); }
+    25% { opacity: 1; }
+    100% { opacity: 0; transform: translateY(-70px) scale(1.1); }
+  }
+
+  @keyframes sbot-caret {
+    0%, 49% { opacity: 1; }
+    50%, 100% { opacity: 0; }
+  }
+
+  @keyframes sbot-slide {
+    from { opacity: 0; transform: translateY(28px); }
+    to { opacity: 1; transform: none; }
+  }
+
+  .sbot-enter,
+  .sbot-bubble,
+  .sbot-editor { opacity: 0; }
+
+  .is-seen .sbot-enter {
+    transform-style: preserve-3d;
+    animation: bot-enter 1.3s cubic-bezier(0.34, 1.4, 0.64, 1) both;
+  }
+
+  .is-seen .sbot-bubble { animation: bot-bubble 0.6s var(--ease-prospectus) 1.1s both; }
+  .is-seen .sbot-editor { animation: sbot-slide 0.9s var(--ease-rise) 0.3s both; }
+
+  .sbot-bob { animation: sbot-bob 1.6s ease-in-out infinite; }
+
+  .sbot-arm { animation: sbot-type 0.32s ease-in-out infinite; }
+  .sbot-arm--right { animation-delay: -0.16s; }
+
+  .sbot-eyes {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: bot-blink 5s ease-in-out infinite;
+  }
+
+  .sbot-antenna,
+  .sbot-logo-glow {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: bot-antenna 2.2s ease-in-out infinite;
+  }
+
+  .sbot-glyph {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: sbot-glyph 3.2s ease-out infinite;
+  }
+  .sbot-glyph--2 { animation-delay: -0.8s; }
+  .sbot-glyph--3 { animation-delay: -1.6s; }
+  .sbot-glyph--4 { animation-delay: -2.4s; }
+
+  .sbot-caret { animation: sbot-caret 1s steps(1) infinite; }
+
+  .stack-chip:hover .stack-mark { color: var(--color-cyan); }
+}
+
+/* Cubi: la mascota de proyectos */
+@layer components {
+  @keyframes cubi-in {
+    0% { transform: translateY(140%) scale(0.6); }
+    60% { transform: translateY(-12%) scale(1.05); }
+    100% { transform: none; }
+  }
+
+  @keyframes cubi-idle {
+    0%, 100% { transform: translateY(0) scale(1, 1); }
+    40% { transform: translateY(-7px) scale(0.98, 1.03); }
+    85% { transform: translateY(0) scale(1.05, 0.94); }
+  }
+
+  @keyframes cubi-shadow {
+    0%, 100% { transform: scaleX(1); opacity: 0.45; }
+    40% { transform: scaleX(0.8); opacity: 0.25; }
+  }
+
+  @keyframes cubi-sprout {
+    0%, 100% { transform: rotate(-6deg); }
+    50% { transform: rotate(8deg); }
+  }
+
+  @keyframes cubi-jump {
+    0% { transform: none; }
+    20% { transform: translateY(4px) scale(1.1, 0.88); }
+    55% { transform: translateY(-38px) rotate(-360deg) scale(0.95, 1.05); }
+    85% { transform: translateY(2px) scale(1.08, 0.92); }
+    100% { transform: none; }
+  }
+
+  @keyframes cubi-bubble {
+    from { opacity: 0; transform: translateY(6px) scale(0.9); }
+    to { opacity: 1; transform: none; }
+  }
+
+  .cubi {
+    transform: translateY(160%);
+    transition: transform 0.5s var(--ease-prospectus);
+  }
+  .cubi.is-visible {
+    transform: none;
+    animation: cubi-in 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  }
+  .cubi:not(.is-visible) * { pointer-events: none; }
+
+  .cubi-bubble {
+    transform-origin: bottom right;
+    animation: cubi-bubble 0.4s var(--ease-prospectus) both;
+  }
+
+  .cubi-body {
+    transform-box: fill-box;
+    transform-origin: 50% 100%;
+    animation: cubi-idle 2.4s ease-in-out infinite;
+  }
+
+  .cubi-shadow {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: cubi-shadow 2.4s ease-in-out infinite;
+  }
+
+  .cubi-sprout {
+    transform-box: fill-box;
+    transform-origin: 30% 100%;
+    animation: cubi-sprout 3s ease-in-out infinite;
+  }
+
+  .cubi-eyes {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: bot-blink 4s ease-in-out infinite;
+  }
+
+  .cubi-btn { cursor: pointer; filter: drop-shadow(0 10px 18px color-mix(in srgb, var(--color-violet) 45%, transparent)); }
+  .cubi-btn:hover .cubi-body { animation-duration: 1s; }
+
+  .cubi-jump { animation: cubi-jump 0.8s cubic-bezier(0.34, 1.3, 0.64, 1); }
+}
+
+/* Formación: hoja y lápiz que escribe */
+@layer components {
+  @keyframes study-pencil {
+    0% { transform: translate(160px, 30px); }
+    4% { transform: translate(68px, 50px); }
+    12% { transform: translate(128px, 50px); }
+    15% { transform: translate(68px, 80px); }
+    25% { transform: translate(148px, 80px); }
+    28% { transform: translate(68px, 104px); }
+    37% { transform: translate(140px, 104px); }
+    40% { transform: translate(68px, 128px); }
+    50% { transform: translate(150px, 128px); }
+    53% { transform: translate(68px, 152px); }
+    59% { transform: translate(118px, 152px); }
+    62% { transform: translate(124px, 172px); }
+    64% { transform: translate(133px, 181px); }
+    68% { transform: translate(152px, 160px); }
+    76%, 100% { transform: translate(160px, 30px); }
+  }
+
+  .study-pencil {
+    animation: study-pencil 9s ease-in-out infinite;
+    filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.35));
+  }
+
+  .study-line {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    opacity: 0;
+  }
+
+  @keyframes study-spark {
+    0%, 100% { transform: scale(0.6) rotate(0deg); opacity: 0.4; }
+    50% { transform: scale(1.1) rotate(90deg); opacity: 1; }
+  }
+  .study-spark {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: study-spark 2.8s ease-in-out infinite;
+  }
+  .study-spark--2 { animation-delay: -1.4s; }
+
+  @keyframes study-line-0 {
+    0%, 4% { stroke-dashoffset: 1; opacity: 0; }
+    4.5% { stroke-dashoffset: 0.98; opacity: 1; }
+    12%, 88% { stroke-dashoffset: 0; opacity: 1; }
+    96%, 100% { stroke-dashoffset: 0; opacity: 0; }
+  }
+  .study-line--0 { animation: study-line-0 9s linear infinite; }
+
+  @keyframes study-line-1 {
+    0%, 15% { stroke-dashoffset: 1; opacity: 0; }
+    15.5% { stroke-dashoffset: 0.98; opacity: 1; }
+    25%, 88% { stroke-dashoffset: 0; opacity: 1; }
+    96%, 100% { stroke-dashoffset: 0; opacity: 0; }
+  }
+  .study-line--1 { animation: study-line-1 9s linear infinite; }
+
+  @keyframes study-line-2 {
+    0%, 28% { stroke-dashoffset: 1; opacity: 0; }
+    28.5% { stroke-dashoffset: 0.98; opacity: 1; }
+    37%, 88% { stroke-dashoffset: 0; opacity: 1; }
+    96%, 100% { stroke-dashoffset: 0; opacity: 0; }
+  }
+  .study-line--2 { animation: study-line-2 9s linear infinite; }
+
+  @keyframes study-line-3 {
+    0%, 40% { stroke-dashoffset: 1; opacity: 0; }
+    40.5% { stroke-dashoffset: 0.98; opacity: 1; }
+    50%, 88% { stroke-dashoffset: 0; opacity: 1; }
+    96%, 100% { stroke-dashoffset: 0; opacity: 0; }
+  }
+  .study-line--3 { animation: study-line-3 9s linear infinite; }
+
+  @keyframes study-line-4 {
+    0%, 53% { stroke-dashoffset: 1; opacity: 0; }
+    53.5% { stroke-dashoffset: 0.98; opacity: 1; }
+    59%, 88% { stroke-dashoffset: 0; opacity: 1; }
+    96%, 100% { stroke-dashoffset: 0; opacity: 0; }
+  }
+  .study-line--4 { animation: study-line-4 9s linear infinite; }
+
+  @keyframes study-line-5 {
+    0%, 62% { stroke-dashoffset: 1; opacity: 0; }
+    62.5% { stroke-dashoffset: 0.98; opacity: 1; }
+    68%, 88% { stroke-dashoffset: 0; opacity: 1; }
+    96%, 100% { stroke-dashoffset: 0; opacity: 0; }
+  }
+  .study-line--5 { animation: study-line-5 9s ease-out infinite; }
+
+}
+
+
+/* Contacto: la carta entra al sobre y sale volando */
+@layer components {
+  @keyframes letter-paper {
+    0%, 10% { transform: translateY(0); }
+    32%, 100% { transform: translateY(56px); }
+  }
+  @keyframes letter-flap-open {
+    0%, 32% { opacity: 1; }
+    34%, 100% { opacity: 0; }
+  }
+  @keyframes letter-flap-closed {
+    0%, 32% { transform: scaleY(0); }
+    40%, 100% { transform: scaleY(1); }
+  }
+  @keyframes letter-seal {
+    0%, 40% { transform: scale(0); }
+    46% { transform: scale(1.3); }
+    50%, 100% { transform: scale(1); }
+  }
+  @keyframes letter-envelope {
+    0% { transform: translateY(20px) scale(0.85); opacity: 0; }
+    8%, 54% { transform: none; opacity: 1; }
+    58% { transform: translate(-8px, 6px) rotate(4deg); opacity: 1; }
+    74% { transform: translate(200px, -130px) rotate(-18deg) scale(0.45); opacity: 0; }
+    100% { transform: translate(200px, -130px) rotate(-18deg) scale(0.45); opacity: 0; }
+  }
+  @keyframes letter-trail {
+    0%, 56% { opacity: 0; transform: translate(0, 0); }
+    62% { opacity: 0.9; }
+    74%, 100% { opacity: 0; transform: translate(120px, -70px); }
+  }
+  @keyframes letter-shadow {
+    0%, 54% { opacity: 0.3; }
+    66%, 100% { opacity: 0; }
+  }
+
+  .letter-envelope {
+    transform-box: view-box;
+    transform-origin: 120px 120px;
+    animation: letter-envelope 6.5s cubic-bezier(0.5, 0, 0.3, 1) infinite;
+  }
+  .letter-paper { animation: letter-paper 6.5s cubic-bezier(0.6, 0, 0.3, 1) infinite; }
+  .letter-flap-open { animation: letter-flap-open 6.5s steps(1) infinite; }
+  .letter-flap-closed {
+    transform-box: view-box;
+    transform-origin: 120px 74px;
+    animation: letter-flap-closed 6.5s var(--ease-prospectus) infinite;
+  }
+  .letter-seal {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: letter-seal 6.5s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
+  }
+  .letter-trail { animation: letter-trail 6.5s ease-out infinite; }
+  .letter-shadow { animation: letter-shadow 6.5s ease-in-out infinite; }
+  .letter-art { filter: drop-shadow(0 16px 30px color-mix(in srgb, var(--color-violet) 40%, transparent)); }
+}
+
+/* En celular el globito de Cubi aparece, se lee y se va, para no tapar contenido */
+@media (max-width: 639px) {
+  @keyframes cubi-bubble-brief {
+    0% { opacity: 0; transform: translateY(6px) scale(0.9); }
+    8%, 75% { opacity: 1; transform: none; }
+    100% { opacity: 0; transform: translateY(4px) scale(0.95); visibility: hidden; }
+  }
+  .cubi-bubble { animation: cubi-bubble-brief 4.5s var(--ease-prospectus) both; }
 }

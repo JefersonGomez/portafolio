@@ -11,13 +11,17 @@ import {
   SiGit,
   SiGithub,
   SiClaude,
+  SiReact,
+  SiTailwindcss,
+  SiVite,
+  SiMongodb,
 } from 'react-icons/si';
 import { FaAws } from 'react-icons/fa6';
 import { techStack } from '../data/portfolioData';
+import StackBot from './StackBot';
 
-// Logos oficiales (Simple Icons vía react-icons) en monocromo tinta. En sus
-// colores de marca serían catorce acentos compitiendo con el violeta, que en este
-// sistema está racionado a la acción primaria.
+// Logos oficiales (Simple Icons vía react-icons) en monocromo; al pasar el
+// cursor se encienden en cian, el acento de código del sitio.
 const MARKS = {
   SiTypescript,
   SiJavascript,
@@ -30,8 +34,20 @@ const MARKS = {
   SiGit,
   SiGithub,
   SiClaude,
+  SiReact,
+  SiTailwindcss,
+  SiVite,
+  SiMongodb,
   FaAws,
 };
+
+// "Bases de datos" -> "bases_de_datos", para que cada grupo sea una clave del objeto
+const toKey = (group) =>
+  group
+    .normalize('NFD')
+    .replace(/[̀-ͯ]/g, '')
+    .toLowerCase()
+    .replace(/\s+/g, '_');
 
 const Stack = () => {
   const ref = useRef(null);
@@ -47,65 +63,128 @@ const Stack = () => {
           io.disconnect();
         }
       },
-      { rootMargin: '-8% 0px' },
+      { rootMargin: '-12% 0px' },
     );
     io.observe(el);
     return () => io.disconnect();
   }, []);
 
   let index = 0;
+  const lastLine = techStack.length + 2;
 
   return (
-    <section id="stack" ref={ref} className="border-t border-hairline">
-      <div className="mx-auto max-w-[84rem] px-6 py-24 lg:px-12 lg:py-32">
-        <div className="max-w-[46ch]">
-          <h2 className="text-[clamp(2rem,4vw,3.25rem)] font-medium leading-[1.1] tracking-[-0.03em] text-ink">
-            Las herramientas con las que construyo.
+    <section id="stack" ref={ref} className="relative overflow-hidden border-t border-hairline">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            'radial-gradient(ellipse 30% 40% at 20% 55%, color-mix(in srgb, var(--color-violet) 13%, transparent), transparent 70%), radial-gradient(ellipse 35% 40% at 75% 50%, color-mix(in srgb, var(--color-cyan) 5%, transparent), transparent 70%)',
+        }}
+      />
+
+      <div className="relative mx-auto max-w-[84rem] px-6 py-24 lg:px-12 lg:py-32">
+        <div className="max-w-[52ch]">
+          <p className="section-eyebrow">
+            <span className="text-cyan">{'// '}</span>stack
+          </p>
+          <h2 className="section-title mt-4">
+            Las herramientas con las que <span className="text-cyan">construyo.</span>
           </h2>
           <p className="mt-6 text-lg leading-relaxed text-body">
             Lo que uso en el día a día para llevar un proyecto de la idea a producción.
           </p>
         </div>
 
-        <div className="mt-16 flex flex-col gap-12 lg:mt-20 lg:gap-14">
-          {techStack.map((row) => (
-            <section key={row.group} aria-labelledby={`stack-${row.group}`}>
-              <h3
-                id={`stack-${row.group}`}
-                className="border-t border-hairline pt-5 text-xs font-medium uppercase tracking-[0.12em] text-muted"
-              >
-                {row.group}
-              </h3>
+        <div className="mt-16 grid items-center gap-14 lg:mt-20 lg:grid-cols-12 lg:gap-10">
+          {/* El robotito en su computadora */}
+          <div className={`relative mx-auto w-[min(22rem,80vw)] lg:col-span-4 lg:w-full ${seen ? 'is-seen' : ''}`}>
+            <div className="sbot-bubble absolute -top-6 right-0 z-10 rounded-2xl rounded-br-sm border border-hairline-deep bg-surface/90 px-4 py-2.5 font-mono text-sm text-ink shadow-lg backdrop-blur sm:-right-4">
+              <span className="text-cyan">{'> '}</span>este es mi stack
+              <span className="sbot-caret ml-0.5 inline-block h-3.5 w-1.5 translate-y-0.5 bg-cyan" aria-hidden="true" />
+            </div>
+            <div className="sbot-enter pt-10">
+              <StackBot />
+            </div>
+          </div>
 
-              <ul className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-                {row.items.map((item) => {
-                  const Mark = MARKS[item.icon];
-                  const delay = `${index++ * 70}ms`;
-                  return (
-                    <li
-                      key={item.name}
-                      style={{ animationDelay: delay }}
-                      className={`stack-chip relative flex items-center gap-3.5 overflow-hidden rounded-lg border border-hairline bg-surface px-4 py-4 ${
-                        seen ? 'is-seen' : 'opacity-0'
-                      }`}
-                    >
-                      {Mark && (
-                        <Mark
-                          size={26}
-                          aria-hidden="true"
-                          style={{ animationDelay: delay }}
-                          className="stack-mark shrink-0"
-                        />
-                      )}
-                      <span className="truncate text-[0.9375rem] font-medium leading-none text-ink">
-                        {item.name}
-                      </span>
-                    </li>
-                  );
-                })}
-              </ul>
-            </section>
-          ))}
+          {/* Editor con el stack como objeto */}
+          <div className={`lg:col-span-8 ${seen ? 'is-seen' : ''}`}>
+            <div className="sbot-editor overflow-hidden rounded-xl border border-hairline bg-surface/80 shadow-[0_30px_60px_-30px_rgba(0,0,0,0.8)] backdrop-blur">
+              <div className="flex items-center gap-3 border-b border-hairline px-4 py-2.5">
+                <span className="flex gap-1.5" aria-hidden="true">
+                  <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f57]/80" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-[#febc2e]/80" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-[#28c840]/80" />
+                </span>
+                <span className="rounded-md bg-ground px-3 py-1 font-mono text-[0.6875rem] text-muted">
+                  stack.ts
+                </span>
+              </div>
+
+              <div className="overflow-x-auto px-3 py-5 font-mono text-sm sm:px-5">
+                <p className="flex gap-4">
+                  <span className="w-5 shrink-0 select-none text-right text-muted/60">1</span>
+                  <span>
+                    <span className="text-violet-active">const</span>{' '}
+                    <span className="text-ink">stack</span> <span className="text-muted">=</span>{' '}
+                    <span className="text-muted">{'{'}</span>
+                  </span>
+                </p>
+
+                <dl>
+                  {techStack.map((row, r) => (
+                    <div key={row.group} className="flex gap-4 py-1.5">
+                      <span className="w-5 shrink-0 select-none pt-2 text-right text-muted/60">{r + 2}</span>
+                      <div className="flex min-w-0 flex-col gap-2 pl-4 sm:flex-row sm:items-start sm:gap-3">
+                        <dt className="shrink-0 pt-2 text-cyan sm:w-52">
+                          {toKey(row.group)}
+                          <span className="text-muted">:</span>
+                        </dt>
+                        <dd>
+                          <ul className="flex flex-wrap items-center gap-2" aria-label={row.group}>
+                            {row.items.map((item) => {
+                              const Mark = MARKS[item.icon];
+                              const delay = `${600 + index++ * 90}ms`;
+                              return (
+                                <li
+                                  key={item.name}
+                                  style={{ animationDelay: delay }}
+                                  className={`stack-chip relative flex items-center gap-2.5 overflow-hidden rounded-lg border border-hairline bg-ground/70 px-3 py-2 ${
+                                    seen ? 'is-seen' : 'opacity-0'
+                                  }`}
+                                >
+                                  {Mark && (
+                                    <Mark
+                                      size={18}
+                                      aria-hidden="true"
+                                      style={{ animationDelay: delay }}
+                                      className="stack-mark shrink-0"
+                                    />
+                                  )}
+                                  <span className="font-sans text-[0.875rem] font-medium leading-none text-ink">
+                                    {item.name}
+                                  </span>
+                                </li>
+                              );
+                            })}
+                          </ul>
+                        </dd>
+                      </div>
+                    </div>
+                  ))}
+                </dl>
+
+                <p className="flex gap-4">
+                  <span className="w-5 shrink-0 select-none text-right text-muted/60">{lastLine}</span>
+                  <span>
+                    <span className="text-muted">{'};'}</span>
+                    <span className="sbot-caret ml-1 inline-block h-4 w-2 translate-y-0.5 bg-cyan/80" aria-hidden="true" />
+                  </span>
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

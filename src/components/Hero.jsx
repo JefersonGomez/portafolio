@@ -1,69 +1,79 @@
 import { ArrowRight } from 'lucide-react';
 import { personalInfo } from '../data/portfolioData';
-import { SealPersonal } from './Seal';
-import Ribbon from './Ribbon';
+import HeroBot from './HeroBot';
 
 const Hero = () => (
   <section id="home" className="relative overflow-hidden">
-    {/* La cinta entra por el borde superior y cae por la derecha. En móvil se
-        mantiene fuera de la columna del titular. */}
-    <Ribbon className="pointer-events-none absolute -top-24 right-[-58%] h-[112%] w-[92%] opacity-55 sm:right-[-40%] sm:w-[76%] sm:opacity-70 lg:-top-28 lg:right-[-8%] lg:h-[140%] lg:w-[54%] lg:opacity-100" />
+    {/* Halo de fondo: violeta y cian muy apagados detrás del titular */}
+    <div
+      aria-hidden="true"
+      className="pointer-events-none absolute inset-0"
+      style={{
+        background:
+          'radial-gradient(ellipse 60% 45% at 50% 42%, color-mix(in srgb, var(--color-violet) 16%, transparent), transparent 70%), radial-gradient(ellipse 35% 30% at 70% 60%, color-mix(in srgb, var(--color-cyan) 7%, transparent), transparent 70%)',
+      }}
+    />
 
-    <div className="relative mx-auto max-w-[84rem] px-6 lg:px-12">
-      <div className="grid items-center gap-16 py-20 lg:min-h-[calc(100svh-4.5rem)] lg:grid-cols-12 lg:gap-10 lg:py-24">
-        <div className="rise lg:col-span-7">
-          <h1 className="text-[clamp(3rem,6.5vw,5.5rem)] font-medium leading-[1.05] tracking-[-0.03em] text-ink">
-            Backend sólido.
-            <br />
-            <span className="text-violet">Frontend claro.</span>
-          </h1>
+    <div className="relative mx-auto flex min-h-[calc(100svh-4.5rem)] max-w-[96rem] flex-col items-center justify-center px-4 py-20 text-center sm:px-6">
+      {/* Mascota: arriba del nombre en móvil, flotando a la derecha en escritorio */}
+      <HeroBot className="mb-6 w-28 sm:w-32 lg:absolute lg:bottom-[12%] lg:right-[5%] lg:mb-0 lg:w-44 xl:right-[8%] xl:w-52" />
 
-          <p className="mt-8 max-w-[46ch] text-lg leading-relaxed text-body sm:text-xl">
-            {personalInfo.role}. {personalInfo.location}.
-          </p>
+      <div className="rise flex flex-col items-center">
+        {/* El nombre, como firma encima del titular */}
+        <p className="font-mono text-[0.9375rem] text-body sm:text-lg">
+          <span className="text-cyan">{'// '}</span>
+          hola, soy <span className="font-medium text-ink">{personalInfo.name}</span>
+        </p>
 
-          <p className="mt-5 flex items-center gap-2.5 text-[0.9375rem] text-body">
-            <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-violet" aria-hidden="true" />
-            {personalInfo.availability}
-          </p>
+        <h1 className="mt-6 font-display text-[clamp(2.75rem,11vw,10rem)] font-bold uppercase leading-[0.95] tracking-[0.01em] text-ink [text-shadow:1px_3px_11px_rgba(0,0,0,0.3)]">
+          Full-stack
+          <br />
+          <span className="text-[0.62em] tracking-[0.04em]">
+            Developer <span className="text-cyan">+ IA</span>
+          </span>
+        </h1>
 
-          <div className="mt-10 flex flex-wrap items-center gap-4">
-            <a
-              href="#projects"
-              className="group inline-flex items-center gap-2 rounded-lg bg-violet px-6 py-3.5 text-[0.9375rem] font-medium text-white transition-colors duration-300 ease-prospectus hover:bg-violet-deep active:bg-violet-active"
-            >
-              Ver proyectos
-              <ArrowRight
-                size={17}
-                strokeWidth={1.75}
-                className="transition-transform duration-300 ease-prospectus group-hover:translate-x-0.5"
-              />
-            </a>
+        <p className="mt-8 max-w-[52ch] font-mono text-sm leading-relaxed text-body sm:text-base">
+          Construyo productos completos, del backend a la interfaz, y les sumo
+          inteligencia artificial que resuelve problemas reales.
+        </p>
 
-            <a
-              href="#contact"
-              onClick={(e) => {
-                // Baja a Contacto y después abre el correo. El mailto va con retraso:
-                // si sale en el mismo clic, el navegador corta el scroll suave.
-                e.preventDefault();
-                document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-                setTimeout(() => {
-                  window.location.href = `mailto:${personalInfo.email}`;
-                }, 800);
-              }}
-              className="inline-flex items-center rounded-lg border border-violet bg-surface px-6 py-3.5 text-[0.9375rem] font-medium text-violet transition-colors duration-300 ease-prospectus hover:bg-violet-wash"
-            >
-              Escribime
-            </a>
-          </div>
-        </div>
+        <p className="mt-5 text-[0.9375rem] text-muted">
+          <span className="relative mr-2.5 inline-flex h-2 w-2 -translate-y-px" aria-hidden="true">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan opacity-60" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-cyan" />
+          </span>
+          {personalInfo.availability} · {personalInfo.location}
+        </p>
 
-        {/* El único objeto oscuro de la página, solo en la luz. */}
-        <div className="flex justify-center lg:col-span-5 lg:justify-end lg:pr-6">
-          <SealPersonal
-            name={personalInfo.name}
-            className="h-auto w-[min(20rem,70vw)] text-ink opacity-95"
-          />
+        <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
+          <a
+            href="#projects"
+            className="group inline-flex items-center gap-2 rounded-lg bg-violet px-6 py-3.5 text-[0.9375rem] font-medium text-white transition-colors duration-300 ease-prospectus hover:bg-violet-deep"
+          >
+            Ver proyectos
+            <ArrowRight
+              size={17}
+              strokeWidth={1.75}
+              className="transition-transform duration-300 ease-prospectus group-hover:translate-x-0.5"
+            />
+          </a>
+
+          <a
+            href="#contact"
+            onClick={(e) => {
+              // Baja a Contacto y después abre el correo. El mailto va con retraso:
+              // si sale en el mismo clic, el navegador corta el scroll suave.
+              e.preventDefault();
+              document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+              setTimeout(() => {
+                window.location.href = `mailto:${personalInfo.email}`;
+              }, 800);
+            }}
+            className="inline-flex items-center rounded-lg border border-hairline-deep px-6 py-3.5 text-[0.9375rem] font-medium text-ink transition-colors duration-300 ease-prospectus hover:border-cyan hover:text-cyan"
+          >
+            Escribime
+          </a>
         </div>
       </div>
     </div>

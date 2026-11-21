@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { navLinks, personalInfo } from '../data/portfolioData';
-import { SealMark } from './Seal';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -26,26 +25,30 @@ const Navbar = () => {
 
   return (
     <header
-      className={`sticky top-0 z-50 bg-ground transition-colors duration-300 ease-prospectus ${
-        isScrolled ? 'border-b border-hairline' : 'border-b border-transparent'
+      className={`sticky top-0 z-50 transition-colors duration-300 ease-prospectus ${
+        isScrolled
+          ? 'border-b border-hairline bg-ground/80 backdrop-blur-md'
+          : 'border-b border-transparent bg-ground'
       }`}
     >
       <nav className="mx-auto flex h-18 max-w-[84rem] items-center justify-between px-6 lg:px-12">
-        <a href="#home" className="flex items-center gap-3 text-ink">
-          <SealMark className="h-7 w-7" />
-          <span className="text-[0.9375rem] font-medium tracking-[-0.01em]">
+        <a href="#home" className="group font-mono text-[0.9375rem] text-ink">
+          <span className="text-cyan">&lt;</span>
+          <span className="transition-colors duration-300 ease-prospectus group-hover:text-cyan">
             {personalInfo.name.split(' ').slice(0, 2).join(' ')}
           </span>
+          <span className="text-cyan"> /&gt;</span>
         </a>
 
-        <div className="hidden items-center gap-9 md:flex">
+        <div className="hidden items-center gap-8 md:flex">
           {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
               {...linkProps(link)}
-              className="text-[0.9375rem] text-body transition-colors duration-300 ease-prospectus hover:text-violet"
+              className="group font-mono text-sm lowercase text-body transition-colors duration-300 ease-prospectus hover:text-ink"
             >
+              <span className="text-cyan/70 transition-colors duration-300 ease-prospectus group-hover:text-cyan">{'// '}</span>
               {link.label}
             </a>
           ))}
@@ -78,8 +81,9 @@ const Navbar = () => {
                 href={link.href}
                 {...linkProps(link)}
                 onClick={() => setIsMenuOpen(false)}
-                className="border-b border-hairline py-4 text-base text-body"
+                className="border-b border-hairline py-4 font-mono text-[0.9375rem] lowercase text-body"
               >
+                <span className="text-cyan">{'// '}</span>
                 {link.label}
               </a>
             ))}

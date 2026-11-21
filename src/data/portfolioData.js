@@ -16,7 +16,7 @@ export const personalInfo = {
   photo: '/foto-perfil/foto1.jpg',
   photoWidth: 1254,
   photoHeight: 857,
-  linkedin: 'https://www.linkedin.com/in/jeferson-bustamante-gomez-86853a297/',
+  linkedin: 'https://www.linkedin.com/in/jefersonbustamantegomez/',
 };
 
 // Solo destinos que existen de verdad: un enlace que no lleva a ningún lado es
@@ -39,12 +39,16 @@ export const education = {
 // Insignias de LinkedIn. Todas enlazan a la página de certificaciones del perfil,
 // donde está el botón "Mostrar credencial" de cada una.
 export const certificationsUrl =
-  'https://www.linkedin.com/in/jeferson-bustamante-gomez-86853a297/details/certifications/';
+  'https://www.linkedin.com/in/jefersonbustamantegomez/details/certifications/';
 
+// Las seis más relevantes para el perfil, de la más reciente a la más vieja.
 export const certifications = [
-  { name: 'AWS Cloud Quest: Cloud Practitioner', issuer: 'Amazon Web Services', year: '2026', icon: 'FaAws' },
-  { name: 'Claude Academy: Claude 101', issuer: 'Anthropic', year: '2026', icon: 'SiAnthropic' },
-  { name: 'Backend Development and APIs', issuer: 'freeCodeCamp', year: '2026', icon: 'SiFreecodecamp' },
+  { name: 'Getting Started with Generative AI', issuer: 'IBM', year: 'nov. 2026', icon: 'Sparkles' },
+  { name: 'Claude Academy: Claude Code 101', issuer: 'Anthropic', year: 'oct. 2026', icon: 'SiAnthropic' },
+  { name: 'Claude Academy: Claude 101', issuer: 'Anthropic', year: 'sept. 2026', icon: 'SiAnthropic' },
+  { name: 'AWS Cloud Quest: Cloud Practitioner', issuer: 'Amazon Web Services', year: 'sept. 2026', icon: 'FaAws' },
+  { name: 'MongoDB Overview: Core Concepts and Architecture', issuer: 'MongoDB', year: 'sept. 2026', icon: 'SiMongodb' },
+  { name: 'Backend Development and APIs', issuer: 'freeCodeCamp', year: 'ago. 2026', icon: 'SiFreecodecamp' },
 ];
 
 export const techStack = [
@@ -64,8 +68,19 @@ export const techStack = [
     ],
   },
   {
+    group: 'Frontend',
+    items: [
+      { name: 'React', icon: 'SiReact' },
+      { name: 'Vite', icon: 'SiVite' },
+      { name: 'Tailwind CSS', icon: 'SiTailwindcss' },
+    ],
+  },
+  {
     group: 'Bases de datos',
-    items: [{ name: 'PostgreSQL', icon: 'SiPostgresql' }],
+    items: [
+      { name: 'PostgreSQL', icon: 'SiPostgresql' },
+      { name: 'MongoDB', icon: 'SiMongodb' },
+    ],
   },
   {
     group: 'ORM',
@@ -94,45 +109,57 @@ export const techStack = [
   },
 ];
 
-// Proyectos propios; `url` lleva a la demo desplegada y `repo` al código. `figure` apunta a una captura
-// real; cuando es null el componente dibuja la lámina grabada del proyecto.
+// Proyectos propios; `url` lleva a la demo desplegada (null si todavía no hay) y `repo`
+// al código. `tier` ordena el peso visual: featured > mid > minor.
 export const projects = [
   {
-    id: 'studyflow',
-    name: 'StudyFlow',
-    url: 'https://studyflow-frontend-mocha.vercel.app/dashboard',
-    repo: 'https://github.com/JefersonGomez/studyflow-backend',
+    id: 'kitchago',
+    buddy: '¡Los pedidos llegan a cocina en tiempo real! 🍳',
+    tier: 'featured',
+    name: 'KitchaGo',
+    tagline: 'SaaS multi-restaurante',
+    url: null,
+    repo: 'https://github.com/JefersonGomez/sistema-restaurante',
     year: '2026',
-    lastCommit: 'julio 2026',
-    commits: 25,
+    lastCommit: 'noviembre 2026',
+    commits: 65,
     description:
-      'API REST para una plataforma de gestión académica: materias, tareas, notas, eventos y pizarra. Sube PDFs y les extrae el texto, y la capa de IA corre local con Ollama en vez de depender de un servicio externo.',
-    stack: ['Go', 'Gin', 'PostgreSQL', 'GORM', 'Ollama', 'JWT', 'Google OAuth', 'Swagger'],
-    figure: '/proyectos/studyflow.png',
-    figureWidth: 1903,
-    figureHeight: 944,
+      'Los comensales escanean un QR en la mesa, ven el menú (ES/EN) en su celular y piden; los pedidos llegan en tiempo real a cocina, bar, meseros y caja. Una sola instancia sirve a todos los restaurantes y ninguno puede ver los datos de otro.',
+    highlights: ['Multi-tenant aislado', 'Tiempo real con WebSockets', 'Menú bilingüe por QR'],
+    stack: ['TypeScript', 'React', 'Express', 'Socket.IO', 'PostgreSQL', 'Prisma', 'TanStack Query', 'Docker'],
+    figure: '/proyectos/kitchaGo.jpg',
+    figureWidth: 1280,
+    figureHeight: 634,
     figureAlt:
-      'Panel de StudyFlow con el resumen de materias, tareas pendientes, notas y las próximas entregas.',
+      'Página de inicio de KitchaGo con un menú pedido desde el celular y el tablero de cocina con los pedidos en preparación.',
   },
   {
-    id: 'inventario',
-    name: 'Stockly',
+    id: 'cubivo',
+    buddy: '130 commits y contando. ¡Hasta tiene un cubito en el logo! 📦',
+    tier: 'featured',
+    name: 'Cubivo',
+    tagline: 'Inventario · POS · Facturación',
     url: 'https://stockly-jeferson.duckdns.org/login',
     repo: 'https://github.com/JefersonGomez/api-inventario',
     year: '2026',
-    lastCommit: 'septiembre 2026',
+    lastCommit: 'noviembre 2026',
+    commits: 130,
     description:
-      'Sistema de inventario para empresas con punto de venta incluido, sistema contable y facturación. Autenticación por roles, control de stock con trazabilidad de movimientos y reportes. Sigue en desarrollo.',
+      'Sistema de inventario para empresas con punto de venta incluido, sistema contable y facturación. Autenticación por roles, control de stock con trazabilidad de movimientos y reportes.',
+    highlights: ['Roles admin y cajero', 'Trazabilidad de stock', 'Demo con datos reales'],
     stack: ['TypeScript', 'Express', 'PostgreSQL', 'Prisma', 'Docker', 'Zod', 'Jest'],
-    figure: '/proyectos/stockly.png',
-    figureWidth: 1040,
-    figureHeight: 720,
+    figure: '/proyectos/Cubivo.png',
+    figureWidth: 1751,
+    figureHeight: 883,
     figureAlt:
-      'Pantalla de inicio de sesión de Stockly, con acceso de demostración como administrador o como cajero.',
+      'Pantalla de inicio de sesión de Cubivo, con acceso de demostración como administrador o como cajero.',
   },
   {
     id: 'techrag',
+    buddy: 'Le preguntas a un repo y te responde con la fuente 🤓',
+    tier: 'mid',
     name: 'TechRAG Assistant',
+    tagline: 'RAG sobre código y documentación',
     url: 'https://rag.jefersonbustamante.duckdns.org/#/',
     repo: 'https://github.com/JefersonGomez/RAG-Techrag-Assistant',
     year: '2026',
@@ -146,5 +173,45 @@ export const projects = [
     figureHeight: 700,
     figureAlt:
       'Portada de TechRAG Assistant: preguntas sobre un repositorio respondidas citando el archivo y las líneas de origen.',
+  },
+  {
+    id: 'studyflow',
+    buddy: 'Su IA corre local con Ollama, sin nube 🧠',
+    tier: 'minor',
+    name: 'StudyFlow',
+    tagline: 'Gestión académica con IA local',
+    url: 'https://studyflow-frontend-mocha.vercel.app/dashboard',
+    repo: 'https://github.com/JefersonGomez/studyflow-backend',
+    year: '2026',
+    lastCommit: 'julio 2026',
+    commits: 25,
+    description:
+      'API REST para gestión académica: materias, tareas, notas, eventos y pizarra. Extrae el texto de PDFs y la capa de IA corre local con Ollama.',
+    stack: ['Go', 'Gin', 'PostgreSQL', 'GORM', 'Ollama', 'JWT'],
+    figure: '/proyectos/studyflow.png',
+    figureWidth: 1903,
+    figureHeight: 944,
+    figureAlt:
+      'Panel de StudyFlow con el resumen de materias, tareas pendientes, notas y las próximas entregas.',
+  },
+  {
+    id: 'rifas',
+    buddy: 'Del cuaderno a la web: rifas del 00 al 99 🎟️',
+    tier: 'minor',
+    name: 'Rifas Ivannia',
+    tagline: 'Rifas 00–99 sin papel',
+    url: 'https://rifasivannia.duckdns.org/admin/login',
+    repo: 'https://github.com/JefersonGomez/sistema_rifas',
+    year: '2026',
+    lastCommit: 'noviembre 2026',
+    commits: 22,
+    description:
+      'Página pública con los números libres y panel privado para asignar números, registrar abonos en efectivo o SINPE Móvil y mandar recordatorios por WhatsApp con el mensaje ya escrito. Historial con métricas de rifas pasadas.',
+    stack: ['React', 'Express', 'PostgreSQL', 'Prisma', 'TanStack Query', 'Recharts'],
+    figure: '/proyectos/rifas.png',
+    figureWidth: 297,
+    figureHeight: 95,
+    figureIsLogo: true,
+    figureAlt: 'Logo de Rifas Ivannia.',
   },
 ];

@@ -1,35 +1,63 @@
-import { GraduationCap, Award, ArrowUpRight } from 'lucide-react';
-import { SiAnthropic, SiFreecodecamp } from 'react-icons/si';
+import { GraduationCap, Award, ArrowUpRight, Sparkles } from 'lucide-react';
+import { SiAnthropic, SiFreecodecamp, SiMongodb } from 'react-icons/si';
 import { FaAws } from 'react-icons/fa6';
 import { education, certifications, certificationsUrl } from '../data/portfolioData';
+import StudyDoodle from './StudyDoodle';
 
-const MARKS = { SiAnthropic, SiFreecodecamp, FaAws };
+const MARKS = { SiAnthropic, SiFreecodecamp, SiMongodb, FaAws, Sparkles };
 
 const Education = () => (
-  <section id="education" className="border-t border-hairline">
-    <div className="mx-auto max-w-[84rem] px-6 py-24 lg:px-12 lg:py-32">
-      <h2 className="max-w-[20ch] text-[clamp(2rem,4vw,3.25rem)] font-medium leading-[1.1] tracking-[-0.03em] text-ink">
-        Formación
-      </h2>
+  <section id="education" className="relative overflow-hidden border-t border-hairline">
+    <div
+      aria-hidden="true"
+      className="pointer-events-none absolute inset-0"
+      style={{
+        background:
+          'radial-gradient(ellipse 30% 40% at 78% 30%, color-mix(in srgb, var(--color-violet) 13%, transparent), transparent 70%)',
+      }}
+    />
+    <div className="relative mx-auto max-w-[84rem] px-6 py-24 lg:px-12 lg:py-32">
+      <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-10">
+        <div className="lg:col-span-8">
+          <p className="section-eyebrow">
+            <span className="text-cyan">{'// '}</span>formación
+          </p>
+          <h2 className="section-title mt-4 max-w-[20ch]">
+            Aprender es parte <span className="text-cyan">del trabajo.</span>
+          </h2>
+          <p className="mt-6 max-w-[52ch] text-lg leading-relaxed text-body">
+            La universidad me da la base; los cursos y certificaciones me mantienen al día con
+            la nube, las bases de datos y la IA.
+          </p>
 
-      <div className="mt-14 flex items-start gap-5 rounded-xl border border-hairline bg-surface px-6 py-6 lg:px-8">
-        <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-violet-wash text-violet">
-          <GraduationCap size={24} strokeWidth={1.75} aria-hidden="true" />
-        </span>
-        <div className="flex flex-col gap-1.5">
-          <span className="text-xs font-medium uppercase tracking-[0.12em] text-muted">
-            {education.status}
-          </span>
-          <span className="text-xl font-medium text-ink">{education.school}</span>
-          {education.degree && <span className="text-body">{education.degree}</span>}
+          <div className="mt-10 flex items-start gap-5 rounded-xl border border-hairline bg-surface/70 px-6 py-6 backdrop-blur lg:px-8">
+            <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg border border-hairline-deep bg-ground text-cyan">
+              <GraduationCap size={24} strokeWidth={1.75} aria-hidden="true" />
+            </span>
+            <div className="flex flex-col gap-1.5">
+              <span className="font-mono text-xs text-muted">
+                <span className="text-cyan">{'// '}</span>
+                {education.status.toLowerCase()}
+              </span>
+              <span className="text-xl font-medium text-ink">{education.school}</span>
+              {education.degree && <span className="text-body">{education.degree}</span>}
+            </div>
+          </div>
+        </div>
+
+        <div className="mx-auto w-[min(17rem,70vw)] lg:col-span-4 lg:w-full lg:max-w-[19rem]">
+          <StudyDoodle />
         </div>
       </div>
 
       {certifications.length > 0 && (
         <>
-          <h3 className="mt-16 border-t border-hairline pt-5 text-xs font-medium uppercase tracking-[0.12em] text-muted">
-            Certificaciones
-          </h3>
+          <div className="mt-16 flex items-center gap-4">
+            <h3 className="section-eyebrow shrink-0">
+              <span className="text-cyan">{'// '}</span>certificaciones
+            </h3>
+            <span className="h-px flex-1 bg-hairline" aria-hidden="true" />
+          </div>
           <ul className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {certifications.map((cert) => {
               const Mark = MARKS[cert.icon] ?? Award;

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { ArrowUpRight, Clock } from 'lucide-react';
+import { ArrowUpRight, Clock, Trophy } from 'lucide-react';
 import { FaGithub } from 'react-icons/fa';
 import { projects } from '../data/portfolioData';
 import Cubi from './Cubi';
@@ -36,7 +36,7 @@ const BrowserFrame = ({ project, className = '' }) => (
           height={project.figureHeight}
           loading="lazy"
           decoding="async"
-          className="aspect-[16/9] w-full object-cover object-top transition-transform duration-700 ease-prospectus group-hover:scale-[1.03]"
+          className={`aspect-[16/9] w-full object-cover ${project.figurePosition === 'center' ? 'object-center' : 'object-top'} transition-transform duration-700 ease-prospectus group-hover:scale-[1.03]`}
         />
       </div>
     )}
@@ -227,7 +227,7 @@ const Wide = ({ project, n, onEnter }) => (
 );
 
 const Card = ({ project, n, onEnter }) => (
-  <article data-project={project.id} onMouseEnter={onEnter} className="group flex flex-col rounded-2xl border border-hairline bg-surface/50 p-5 transition-colors duration-500 hover:border-hairline-deep sm:p-6">
+  <article data-project={project.id} onMouseEnter={onEnter} className="group flex h-full flex-col rounded-2xl border border-hairline bg-surface/50 p-5 transition-colors duration-500 hover:border-hairline-deep sm:p-6">
     <BrowserFrame project={project} />
     <div className="mt-6 flex items-center gap-3">
       <Index n={n} className="text-4xl" />
@@ -241,6 +241,12 @@ const Card = ({ project, n, onEnter }) => (
         </h3>
       </div>
     </div>
+    {project.award && (
+      <p className="mt-4 inline-flex w-fit items-center gap-2 rounded-full border border-[#f5c451]/40 bg-[#f5c451]/10 px-3 py-1 font-mono text-[0.6875rem] text-[#f5c451]">
+        <Trophy size={13} strokeWidth={2} aria-hidden="true" />
+        {project.award}
+      </p>
+    )}
     <p className="mt-4 flex-1 text-[0.9375rem] leading-relaxed text-body">{project.description}</p>
     <div className="mt-5">
       <Stack items={project.stack} />
@@ -322,9 +328,16 @@ const Projects = () => {
           {mid.map((p) => (
             <Wide key={p.id} project={p} n={p.n} onEnter={enter(p.id)} />
           ))}
-          <div className="grid gap-6 md:grid-cols-2">
-            {minor.map((p) => (
-              <Card key={p.id} project={p} n={p.n} onEnter={enter(p.id)} />
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+            {minor.map((p, i) => (
+              <div
+                key={p.id}
+                className={
+                  minor.length % 2 === 1 && i === minor.length - 1 ? 'md:col-span-2 xl:col-span-1' : undefined
+                }
+              >
+                <Card project={p} n={p.n} onEnter={enter(p.id)} />
+              </div>
             ))}
           </div>
         </div>

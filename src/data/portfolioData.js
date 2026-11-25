@@ -139,7 +139,7 @@ export const projects = [
     tier: 'featured',
     name: 'Cubivo',
     tagline: 'Inventario · POS · Facturación',
-    url: 'https://stockly-jeferson.duckdns.org/login',
+    url: 'https://cubivo.org',
     repo: 'https://github.com/JefersonGomez/api-inventario',
     year: '2026',
     lastCommit: 'noviembre 2026',
@@ -173,6 +173,28 @@ export const projects = [
     figureHeight: 700,
     figureAlt:
       'Portada de TechRAG Assistant: preguntas sobre un repositorio respondidas citando el archivo y las líneas de origen.',
+  },
+  {
+    id: 'gullak',
+    buddy: '¡7.º lugar en HackDays Fatehpur, hecho en 3 días! 🏆',
+    tier: 'minor',
+    name: 'GullakAI',
+    tagline: 'Proyecto de competencia (7.º lugar)',
+    award: '7.º lugar · HackDays Fatehpur 2026',
+    url: 'https://gullak-ai-psi.vercel.app/',
+    repo: 'https://github.com/JefersonGomez/gullak-ai',
+    year: '2026',
+    lastCommit: 'agosto 2026',
+    commits: 14,
+    description:
+      'Asesor financiero con IA para pequeños comerciantes: registran ventas y gastos diarios, ven su salud financiera en un panel y reciben consejos de ahorro generados con Gemini. Metas, reportes, exportación a CSV y tres idiomas. Hecho en 3 días durante el hackathon.',
+    stack: ['React', 'Vite', 'Tailwind CSS', 'Gemini API', 'Chart.js', 'Framer Motion'],
+    figure: '/proyectos/GullakIA.png',
+    figureWidth: 1892,
+    figureHeight: 900,
+    figurePosition: 'center',
+    figureAlt:
+      'Pantalla de inicio de GullakAI: registrar ventas y gastos, recibir consejos de ahorro con IA y alcanzar metas.',
   },
   {
     id: 'studyflow',

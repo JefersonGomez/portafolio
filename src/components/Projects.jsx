@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { ArrowUpRight, Clock, Trophy } from 'lucide-react';
+import { ArrowUpRight, Clock, Globe, Trophy } from 'lucide-react';
 import { FaGithub } from 'react-icons/fa';
 import { projects } from '../data/portfolioData';
 import Cubi from './Cubi';
@@ -22,7 +22,7 @@ const BrowserFrame = ({ project, className = '' }) => (
         <span className="h-2.5 w-2.5 rounded-full bg-[#28c840]/80" />
       </span>
       <span className="truncate rounded-md bg-ground px-3 py-1 font-mono text-[0.6875rem] text-muted">
-        {host(project.url) ?? `${project.id}.app · próximamente`}
+        {host(project.site ?? project.url) ?? `${project.id}.app · próximamente`}
       </span>
     </div>
     {project.figureIsLogo ? (
@@ -97,6 +97,17 @@ const Links = ({ project }) => (
         <Clock size={14} strokeWidth={1.75} aria-hidden="true" />
         demo muy pronto
       </span>
+    )}
+    {project.site && (
+      <a
+        href={project.site}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex items-center gap-2 rounded-lg border border-hairline-deep px-4 py-2.5 text-sm font-medium text-ink transition-colors duration-300 ease-prospectus hover:border-cyan hover:text-cyan"
+      >
+        <Globe size={15} strokeWidth={1.75} aria-hidden="true" />
+        Sitio web
+      </a>
     )}
     <a
       href={project.repo}

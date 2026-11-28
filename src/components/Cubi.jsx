@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useLang } from '../i18n';
 
 /* Cubi: mascota original de la sección de proyectos. Un cubito con brote en la
    cabeza que rebota, parpadea y cambia de cara según el proyecto que estés viendo.
@@ -88,6 +89,7 @@ const CubiSvg = ({ mood }) => (
 );
 
 const Cubi = ({ message, mood = 'idle', visible }) => {
+  const { t } = useLang();
   const [jumps, setJumps] = useState(0);
   const face = jumps % 2 === 1 ? 'wow' : mood;
 
@@ -107,7 +109,7 @@ const Cubi = ({ message, mood = 'idle', visible }) => {
       <button
         type="button"
         onClick={() => setJumps((j) => j + 1)}
-        aria-label="Cubi, la mascota de los proyectos. Tócalo para que salte."
+        aria-label={t({ es: 'Cubi, la mascota de los proyectos. Tócalo para que salte.', en: 'Cubi, the projects mascot. Tap it to make it jump.' })}
         className="cubi-btn pointer-events-auto w-14 shrink-0 sm:w-28"
       >
         <span key={jumps} className={`block ${jumps ? 'cubi-jump' : ''}`}>

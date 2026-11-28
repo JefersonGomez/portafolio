@@ -3,10 +3,13 @@ import { SiAnthropic, SiFreecodecamp, SiMongodb } from 'react-icons/si';
 import { FaAws } from 'react-icons/fa6';
 import { education, certifications, certificationsUrl } from '../data/portfolioData';
 import StudyDoodle from './StudyDoodle';
+import { useLang } from '../i18n';
 
 const MARKS = { SiAnthropic, SiFreecodecamp, SiMongodb, FaAws, Sparkles };
 
-const Education = () => (
+const Education = () => {
+  const { t } = useLang();
+  return (
   <section id="education" className="relative overflow-hidden border-t border-hairline">
     <div
       aria-hidden="true"
@@ -20,14 +23,17 @@ const Education = () => (
       <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-10">
         <div className="lg:col-span-8">
           <p className="section-eyebrow">
-            <span className="text-cyan">{'// '}</span>formación
+            <span className="text-cyan">{'// '}</span>{t({ es: 'formación', en: 'education' })}
           </p>
           <h2 className="section-title mt-4 max-w-[20ch]">
-            Aprender es parte <span className="text-cyan">del trabajo.</span>
+            {t({ es: 'Aprender es parte', en: 'Learning is part' })}{' '}
+            <span className="text-cyan">{t({ es: 'del trabajo.', en: 'of the job.' })}</span>
           </h2>
           <p className="mt-6 max-w-[52ch] text-lg leading-relaxed text-body">
-            La universidad me da la base; los cursos y certificaciones me mantienen al día con
-            la nube, las bases de datos y la IA.
+            {t({
+              es: 'La universidad me da la base; los cursos y certificaciones me mantienen al día con la nube, las bases de datos y la IA.',
+              en: 'University gives me the foundation; courses and certifications keep me current with the cloud, databases and AI.',
+            })}
           </p>
 
           <div className="mt-10 flex items-start gap-5 rounded-xl border border-hairline bg-surface/70 px-6 py-6 lg:px-8">
@@ -37,10 +43,10 @@ const Education = () => (
             <div className="flex flex-col gap-1.5">
               <span className="font-mono text-xs text-muted">
                 <span className="text-cyan">{'// '}</span>
-                {education.status.toLowerCase()}
+                {t(education.status).toLowerCase()}
               </span>
               <span className="text-xl font-medium text-ink">{education.school}</span>
-              {education.degree && <span className="text-body">{education.degree}</span>}
+              {education.degree && <span className="text-body">{t(education.degree)}</span>}
             </div>
           </div>
         </div>
@@ -54,7 +60,7 @@ const Education = () => (
         <>
           <div className="mt-16 flex items-center gap-4">
             <h3 className="section-eyebrow shrink-0">
-              <span className="text-cyan">{'// '}</span>certificaciones
+              <span className="text-cyan">{'// '}</span>{t({ es: 'certificaciones', en: 'certifications' })}
             </h3>
             <span className="h-px flex-1 bg-hairline" aria-hidden="true" />
           </div>
@@ -75,9 +81,9 @@ const Education = () => (
                     <span className="flex min-w-0 flex-1 flex-col gap-1.5">
                       <span className="font-medium leading-snug text-ink">{cert.name}</span>
                       <span className="text-sm text-muted">
-                        {cert.issuer} · {cert.year}
+                        {cert.issuer} · {t(cert.year)}
                       </span>
-                      <span className="sr-only">(ver credencial en LinkedIn)</span>
+                      <span className="sr-only">{t({ es: '(ver credencial en LinkedIn)', en: '(view credential on LinkedIn)' })}</span>
                     </span>
                     <ArrowUpRight
                       size={16}
@@ -93,6 +99,7 @@ const Education = () => (
       )}
     </div>
   </section>
-);
+  );
+};
 
 export default Education;

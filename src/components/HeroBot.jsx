@@ -1,20 +1,23 @@
 import { FaGithub } from 'react-icons/fa';
 import { personalInfo } from '../data/portfolioData';
+import { useLang } from '../i18n';
 
 /* Mascota original del portfolio: un robotito con visor que entra en 3D,
    flota, parpadea y saluda. Todo es SVG + CSS (ver .bot-* en index.css). */
-const HeroBot = ({ className = '' }) => (
+const HeroBot = ({ className = '' }) => {
+  const { t } = useLang();
+  return (
   <a
     href={personalInfo.github}
     target="_blank"
     rel="noopener noreferrer"
-    aria-label="Ver mi GitHub"
+    aria-label={t({ es: 'Ver mi GitHub', en: 'See my GitHub' })}
     className={`bot group block [perspective:900px] ${className}`}
   >
     {/* Globito con el enlace */}
     <span className="bot-bubble absolute -left-10 top-[6%] z-10 flex items-center gap-2 whitespace-nowrap rounded-full border border-hairline-deep bg-surface/90 px-3.5 py-1.5 font-mono text-xs text-ink shadow-lg transition-colors duration-300 group-hover:border-cyan group-hover:text-cyan">
       <FaGithub size={14} aria-hidden="true" />
-      mi código
+      {t({ es: 'mi código', en: 'my code' })}
     </span>
 
     <div className="bot-enter">
@@ -96,6 +99,7 @@ const HeroBot = ({ className = '' }) => (
       <div className="bot-shadow mx-auto -mt-2 h-4 w-1/2 rounded-[50%] bg-violet/40 blur-md" />
     </div>
   </a>
-);
+  );
+};
 
 export default HeroBot;

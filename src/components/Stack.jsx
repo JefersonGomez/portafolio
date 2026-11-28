@@ -19,6 +19,7 @@ import {
 import { FaAws } from 'react-icons/fa6';
 import { techStack } from '../data/portfolioData';
 import StackBot from './StackBot';
+import { useLang } from '../i18n';
 
 // Logos oficiales (Simple Icons vía react-icons) en monocromo; al pasar el
 // cursor se encienden en cian, el acento de código del sitio.
@@ -69,6 +70,7 @@ const Stack = () => {
     return () => io.disconnect();
   }, []);
 
+  const { t } = useLang();
   let index = 0;
   const lastLine = techStack.length + 2;
 
@@ -89,10 +91,11 @@ const Stack = () => {
             <span className="text-cyan">{'// '}</span>stack
           </p>
           <h2 className="section-title mt-4">
-            Las herramientas con las que <span className="text-cyan">construyo.</span>
+            {t({ es: 'Las herramientas con las que', en: 'The tools I' })}{' '}
+            <span className="text-cyan">{t({ es: 'construyo.', en: 'build with.' })}</span>
           </h2>
           <p className="mt-6 text-lg leading-relaxed text-body">
-            Lo que uso en el día a día para llevar un proyecto de la idea a producción.
+            {t({ es: 'Lo que uso en el día a día para llevar un proyecto de la idea a producción.', en: 'What I use day to day to take a project from idea to production.' })}
           </p>
         </div>
 
@@ -100,7 +103,7 @@ const Stack = () => {
           {/* El robotito en su computadora */}
           <div className={`relative mx-auto w-[min(22rem,80vw)] lg:col-span-4 lg:w-full ${seen ? 'is-seen' : ''}`}>
             <div className="sbot-bubble absolute -top-6 right-0 z-10 rounded-2xl rounded-br-sm border border-hairline-deep bg-surface/90 px-4 py-2.5 font-mono text-sm text-ink shadow-lg sm:-right-4">
-              <span className="text-cyan">{'> '}</span>este es mi stack
+              <span className="text-cyan">{'> '}</span>{t({ es: 'este es mi stack', en: 'this is my stack' })}
               <span className="sbot-caret ml-0.5 inline-block h-3.5 w-1.5 translate-y-0.5 bg-cyan" aria-hidden="true" />
             </div>
             <div className="sbot-enter pt-10">
@@ -134,15 +137,15 @@ const Stack = () => {
 
                 <dl>
                   {techStack.map((row, r) => (
-                    <div key={row.group} className="flex gap-4 py-1.5">
+                    <div key={toKey(t(row.group))} className="flex gap-4 py-1.5">
                       <span className="w-5 shrink-0 select-none pt-2 text-right text-muted/60">{r + 2}</span>
                       <div className="flex min-w-0 flex-col gap-2 pl-4 sm:flex-row sm:items-start sm:gap-3">
                         <dt className="shrink-0 pt-2 text-cyan sm:w-52">
-                          {toKey(row.group)}
+                          {toKey(t(row.group))}
                           <span className="text-muted">:</span>
                         </dt>
                         <dd>
-                          <ul className="flex flex-wrap items-center gap-2" aria-label={row.group}>
+                          <ul className="flex flex-wrap items-center gap-2" aria-label={t(row.group)}>
                             {row.items.map((item) => {
                               const Mark = MARKS[item.icon];
                               const delay = `${300 + index++ * 45}ms`;

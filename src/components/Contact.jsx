@@ -3,6 +3,7 @@ import { Mail, Copy, Check, ArrowUpRight, ArrowUp, Phone } from 'lucide-react';
 import { FaGithub, FaLinkedin, FaWhatsapp } from 'react-icons/fa6';
 import { personalInfo } from '../data/portfolioData';
 import SendLetter from './SendLetter';
+import { useLang } from '../i18n';
 
 const phoneDigits = personalInfo.phone.replace(/\D/g, '');
 
@@ -14,14 +15,14 @@ const channels = [
     Icon: FaWhatsapp,
   },
   {
-    label: 'Teléfono',
+    label: { es: 'Teléfono', en: 'Phone' },
     value: personalInfo.phone,
     href: `tel:+${phoneDigits}`,
     Icon: Phone,
   },
   {
     label: 'LinkedIn',
-    value: 'Ver perfil',
+    value: { es: 'Ver perfil', en: 'View profile' },
     href: personalInfo.linkedin,
     Icon: FaLinkedin,
   },
@@ -52,6 +53,7 @@ const useCostaRicaTime = () => {
 const Contact = () => {
   const [copied, setCopied] = useState(false);
   const time = useCostaRicaTime();
+  const { t } = useLang();
 
   const copyEmail = async () => {
     try {
@@ -80,16 +82,19 @@ const Contact = () => {
         </div>
 
         <p className="section-eyebrow">
-          <span className="text-cyan">{'// '}</span>contacto
+          <span className="text-cyan">{'// '}</span>{t({ es: 'contacto', en: 'contact' })}
         </p>
 
         <h2 className="mx-auto mt-5 max-w-[14ch] font-display text-[clamp(2.4rem,7vw,6rem)] font-bold uppercase leading-[0.98] text-ink [text-shadow:1px_3px_11px_rgba(0,0,0,0.3)]">
-          ¿Construimos algo <span className="text-cyan">juntos?</span>
+          {t({ es: '¿Construimos algo', en: 'Shall we build something' })}{' '}
+          <span className="text-cyan">{t({ es: 'juntos?', en: 'together?' })}</span>
         </h2>
 
         <p className="mx-auto mt-7 max-w-[48ch] text-lg leading-relaxed text-body">
-          ¿Tienes un proyecto, una vacante o una idea con IA? Escríbeme y te respondo a la
-          brevedad.
+          {t({
+            es: '¿Tienes un proyecto, una vacante o una idea con IA? Escríbeme y te respondo a la brevedad.',
+            en: "Got a project, a job opening or an AI idea? Write to me and I'll get back to you soon.",
+          })}
         </p>
 
         <div className="mt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 font-mono text-xs text-muted sm:text-sm">
@@ -98,11 +103,11 @@ const Contact = () => {
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan opacity-60" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-cyan" />
             </span>
-            {personalInfo.availability.toLowerCase()}
+            {t(personalInfo.availability).toLowerCase()}
           </span>
           <span>
             <span className="text-cyan">{'// '}</span>
-            {personalInfo.contactLocation.toLowerCase()} · {time} (GMT-6)
+            {t(personalInfo.contactLocation).toLowerCase()} · {time} (GMT-6)
           </span>
         </div>
 
@@ -131,14 +136,14 @@ const Contact = () => {
             }`}
           >
             {copied ? <Check size={16} aria-hidden="true" /> : <Copy size={16} aria-hidden="true" />}
-            <span aria-live="polite">{copied ? '¡copiado!' : 'copiar correo'}</span>
+            <span aria-live="polite">{copied ? t({ es: '¡copiado!', en: 'copied!' }) : t({ es: 'copiar correo', en: 'copy email' })}</span>
           </button>
         </div>
 
         {/* Otros canales */}
         <ul className="mx-auto mt-14 grid max-w-5xl gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {channels.map(({ label, value, href, Icon }) => (
-            <li key={label}>
+            <li key={t(label)}>
               <a
                 href={href}
                 target={href.startsWith('http') ? '_blank' : undefined}
@@ -151,9 +156,9 @@ const Contact = () => {
                 <span className="flex min-w-0 flex-col gap-1">
                   <span className="font-mono text-[0.6875rem] text-muted">
                     <span className="text-cyan">{'// '}</span>
-                    {label.toLowerCase()}
+                    {t(label).toLowerCase()}
                   </span>
-                  <span className="truncate text-[0.9375rem] font-medium text-ink">{value}</span>
+                  <span className="truncate text-[0.9375rem] font-medium text-ink">{t(value)}</span>
                 </span>
               </a>
             </li>
@@ -168,12 +173,12 @@ const Contact = () => {
             <span className="text-ink">{personalInfo.name}</span>
             <span className="text-cyan"> /&gt;</span> · © {new Date().getFullYear()}
           </span>
-          <span>hecho con react + vite + tailwind</span>
+          <span>{t({ es: 'hecho con react + vite + tailwind', en: 'built with react + vite + tailwind' })}</span>
           <a
             href="#home"
             className="group inline-flex items-center gap-1.5 transition-colors duration-300 ease-prospectus hover:text-cyan"
           >
-            <span className="text-cyan">{'// '}</span>volver arriba
+            <span className="text-cyan">{'// '}</span>{t({ es: 'volver arriba', en: 'back to top' })}
             <ArrowUp
               size={14}
               aria-hidden="true"

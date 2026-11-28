@@ -3,6 +3,7 @@ import { ArrowUpRight, Clock, Globe, Trophy } from 'lucide-react';
 import { FaGithub } from 'react-icons/fa';
 import { projects } from '../data/portfolioData';
 import Cubi from './Cubi';
+import { useLang } from '../i18n';
 
 // Tres pesos visuales: los proyectos fuertes van grandes y alternados, el
 // intermedio ocupa una fila ancha y los menores comparten fila en tarjetas.
@@ -11,7 +12,9 @@ const pad = (n) => String(n).padStart(2, '0');
 const host = (url) => (url ? new URL(url).host : null);
 
 /* Captura dentro de una ventana de navegador */
-const BrowserFrame = ({ project, className = '' }) => (
+const BrowserFrame = ({ project, className = '' }) => {
+  const { t } = useLang();
+  return (
   <div
     className={`overflow-hidden rounded-xl border border-hairline bg-surface shadow-[0_30px_60px_-30px_rgba(0,0,0,0.8)] ${className}`}
   >
@@ -22,7 +25,7 @@ const BrowserFrame = ({ project, className = '' }) => (
         <span className="h-2.5 w-2.5 rounded-full bg-[#28c840]/80" />
       </span>
       <span className="truncate rounded-md bg-ground px-3 py-1 font-mono text-[0.6875rem] text-muted">
-        {host(project.site ?? project.url) ?? `${project.id}.app · próximamente`}
+        {host(project.site ?? project.url) ?? `${project.id}.app · ${t({ es: 'próximamente', en: 'coming soon' })}`}
       </span>
     </div>
     {project.figureIsLogo ? (
@@ -31,7 +34,7 @@ const BrowserFrame = ({ project, className = '' }) => (
       <div className="overflow-hidden">
         <img
           src={project.figure}
-          alt={project.figureAlt}
+          alt={t(project.figureAlt)}
           width={project.figureWidth}
           height={project.figureHeight}
           loading="lazy"
@@ -41,11 +44,14 @@ const BrowserFrame = ({ project, className = '' }) => (
       </div>
     )}
   </div>
-);
+  );
+};
 
 /* Para el proyecto que solo tiene logo: el logo sobre el tablero de números 00–99 */
 const taken = new Set([3, 7, 12, 18, 21, 25, 33, 38, 41, 47, 52, 56, 64, 69, 70, 77, 81, 88, 93, 99]);
-const RaffleBoard = ({ project }) => (
+const RaffleBoard = ({ project }) => {
+  const { t } = useLang();
+  return (
   <div className="relative aspect-[16/9] overflow-hidden bg-[#1c2326]">
     <div
       className="absolute inset-3 grid grid-cols-10 gap-1 opacity-40 transition-opacity duration-500 group-hover:opacity-60"
@@ -65,7 +71,7 @@ const RaffleBoard = ({ project }) => (
     <div className="absolute inset-0 flex items-center justify-center bg-[radial-gradient(ellipse_45%_40%_at_center,#1c2326_55%,transparent)]">
       <img
         src={project.figure}
-        alt={project.figureAlt}
+        alt={t(project.figureAlt)}
         width={project.figureWidth}
         height={project.figureHeight}
         loading="lazy"
@@ -74,9 +80,12 @@ const RaffleBoard = ({ project }) => (
       />
     </div>
   </div>
-);
+  );
+};
 
-const Links = ({ project }) => (
+const Links = ({ project }) => {
+  const { t } = useLang();
+  return (
   <div className="flex flex-wrap items-center gap-3">
     {project.url ? (
       <a
@@ -85,7 +94,7 @@ const Links = ({ project }) => (
         rel="noopener noreferrer"
         className="group/link inline-flex items-center gap-2 rounded-lg bg-violet px-4 py-2.5 text-sm font-medium text-white transition-colors duration-300 ease-prospectus hover:bg-violet-deep"
       >
-        Ver demo
+        {t({ es: 'Ver demo', en: 'Live demo' })}
         <ArrowUpRight
           size={16}
           strokeWidth={1.75}
@@ -95,7 +104,7 @@ const Links = ({ project }) => (
     ) : (
       <span className="inline-flex items-center gap-2 rounded-lg border border-dashed border-hairline-deep px-4 py-2.5 font-mono text-xs text-muted">
         <Clock size={14} strokeWidth={1.75} aria-hidden="true" />
-        demo muy pronto
+        {t({ es: 'demo muy pronto', en: 'demo coming soon' })}
       </span>
     )}
     {project.site && (
@@ -106,7 +115,7 @@ const Links = ({ project }) => (
         className="inline-flex items-center gap-2 rounded-lg border border-hairline-deep px-4 py-2.5 text-sm font-medium text-ink transition-colors duration-300 ease-prospectus hover:border-cyan hover:text-cyan"
       >
         <Globe size={15} strokeWidth={1.75} aria-hidden="true" />
-        Sitio web
+        {t({ es: 'Sitio web', en: 'Website' })}
       </a>
     )}
     <a
@@ -116,10 +125,11 @@ const Links = ({ project }) => (
       className="inline-flex items-center gap-2 rounded-lg border border-hairline-deep px-4 py-2.5 text-sm font-medium text-ink transition-colors duration-300 ease-prospectus hover:border-cyan hover:text-cyan"
     >
       <FaGithub size={15} aria-hidden="true" />
-      Código
+      {t({ es: 'Código', en: 'Code' })}
     </a>
   </div>
-);
+  );
+};
 
 const Stack = ({ items }) => (
   <ul className="flex flex-wrap gap-2">
@@ -134,13 +144,16 @@ const Stack = ({ items }) => (
   </ul>
 );
 
-const Meta = ({ project }) => (
+const Meta = ({ project }) => {
+  const { t } = useLang();
+  return (
   <p className="flex items-center gap-2 font-mono text-xs text-muted">
     <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-cyan" aria-hidden="true" />
-    {project.lastCommit}
+    {t(project.lastCommit)}
     {project.commits && ` · ${project.commits} commits`}
   </p>
-);
+  );
+};
 
 /* Número grande con contorno, como marca de agua del proyecto */
 const Index = ({ n, className = '' }) => (
@@ -152,7 +165,9 @@ const Index = ({ n, className = '' }) => (
   </span>
 );
 
-const Featured = ({ project, n, flip, onEnter }) => (
+const Featured = ({ project, n, flip, onEnter }) => {
+  const { t } = useLang();
+  return (
   <article data-project={project.id} onMouseEnter={onEnter} className="group grid items-center gap-10 lg:grid-cols-12 lg:gap-14">
     <div className={`relative lg:col-span-7 ${flip ? 'lg:order-2' : ''}`}>
       <div
@@ -170,26 +185,26 @@ const Featured = ({ project, n, flip, onEnter }) => (
       <div className="flex items-end gap-4">
         <Index n={n} className="text-[4.5rem]" />
         <span className="mb-2 rounded-full border border-cyan/40 bg-cyan/10 px-3 py-1 font-mono text-[0.6875rem] uppercase tracking-wider text-cyan">
-          destacado
+          {t({ es: 'destacado', en: 'featured' })}
         </span>
       </div>
 
       <p className="mt-4 font-mono text-sm text-body">
         <span className="text-cyan">{'// '}</span>
-        {project.tagline}
+        {t(project.tagline)}
       </p>
       <h3 className="mt-2 font-display text-[clamp(2rem,3.4vw,3rem)] font-bold uppercase leading-none text-ink">
         {project.name}
       </h3>
 
-      <p className="mt-5 leading-relaxed text-body">{project.description}</p>
+      <p className="mt-5 leading-relaxed text-body">{t(project.description)}</p>
 
       {project.highlights && (
         <ul className="mt-5 flex flex-col gap-2">
           {project.highlights.map((h) => (
-            <li key={h} className="flex items-center gap-2.5 text-[0.9375rem] text-ink">
+            <li key={t(h)} className="flex items-center gap-2.5 text-[0.9375rem] text-ink">
               <span className="font-mono text-cyan" aria-hidden="true">→</span>
-              {h}
+              {t(h)}
             </li>
           ))}
         </ul>
@@ -205,9 +220,12 @@ const Featured = ({ project, n, flip, onEnter }) => (
       </div>
     </div>
   </article>
-);
+  );
+};
 
-const Wide = ({ project, n, onEnter }) => (
+const Wide = ({ project, n, onEnter }) => {
+  const { t } = useLang();
+  return (
   <article data-project={project.id} onMouseEnter={onEnter} className="group grid items-center gap-8 rounded-2xl border border-hairline bg-surface/50 p-5 transition-colors duration-500 hover:border-hairline-deep sm:p-8 lg:grid-cols-12 lg:gap-12">
     <div className="lg:col-span-5">
       <BrowserFrame project={project} />
@@ -218,14 +236,14 @@ const Wide = ({ project, n, onEnter }) => (
         <div>
           <p className="font-mono text-sm text-body">
             <span className="text-cyan">{'// '}</span>
-            {project.tagline}
+            {t(project.tagline)}
           </p>
           <h3 className="mt-1 font-display text-[clamp(1.6rem,2.6vw,2.25rem)] font-bold uppercase leading-none text-ink">
             {project.name}
           </h3>
         </div>
       </div>
-      <p className="mt-5 max-w-[60ch] leading-relaxed text-body">{project.description}</p>
+      <p className="mt-5 max-w-[60ch] leading-relaxed text-body">{t(project.description)}</p>
       <div className="mt-5">
         <Stack items={project.stack} />
       </div>
@@ -235,9 +253,12 @@ const Wide = ({ project, n, onEnter }) => (
       </div>
     </div>
   </article>
-);
+  );
+};
 
-const Card = ({ project, n, onEnter }) => (
+const Card = ({ project, n, onEnter }) => {
+  const { t } = useLang();
+  return (
   <article data-project={project.id} onMouseEnter={onEnter} className="group flex h-full flex-col rounded-2xl border border-hairline bg-surface/50 p-5 transition-colors duration-500 hover:border-hairline-deep sm:p-6">
     <BrowserFrame project={project} />
     <div className="mt-6 flex items-center gap-3">
@@ -245,7 +266,7 @@ const Card = ({ project, n, onEnter }) => (
       <div>
         <p className="font-mono text-xs text-body">
           <span className="text-cyan">{'// '}</span>
-          {project.tagline}
+          {t(project.tagline)}
         </p>
         <h3 className="mt-1 font-display text-2xl font-bold uppercase leading-none text-ink">
           {project.name}
@@ -255,10 +276,10 @@ const Card = ({ project, n, onEnter }) => (
     {project.award && (
       <p className="mt-4 inline-flex w-fit items-center gap-2 rounded-full border border-[#f5c451]/40 bg-[#f5c451]/10 px-3 py-1 font-mono text-[0.6875rem] text-[#f5c451]">
         <Trophy size={13} strokeWidth={2} aria-hidden="true" />
-        {project.award}
+        {t(project.award)}
       </p>
     )}
-    <p className="mt-4 flex-1 text-[0.9375rem] leading-relaxed text-body">{project.description}</p>
+    <p className="mt-4 flex-1 text-[0.9375rem] leading-relaxed text-body">{t(project.description)}</p>
     <div className="mt-5">
       <Stack items={project.stack} />
     </div>
@@ -267,7 +288,8 @@ const Card = ({ project, n, onEnter }) => (
       <Meta project={project} />
     </div>
   </article>
-);
+  );
+};
 
 const Projects = () => {
   const numbered = projects.map((p, i) => ({ ...p, n: i + 1 }));
@@ -301,6 +323,7 @@ const Projects = () => {
     };
   }, []);
 
+  const { t } = useLang();
   const current = projects.find((p) => p.id === active);
   const enter = (id) => () => setActive(id);
 
@@ -310,15 +333,19 @@ const Projects = () => {
         <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
           <div>
             <p className="section-eyebrow">
-              <span className="text-cyan">{'// '}</span>proyectos
+              <span className="text-cyan">{'// '}</span>{t({ es: 'proyectos', en: 'projects' })}
             </p>
             <h2 className="section-title mt-4 max-w-[18ch]">
-              Sistemas reales, <span className="text-cyan">construidos</span> y públicos.
+              {t({ es: 'Sistemas reales,', en: 'Real systems,' })}{' '}
+              <span className="text-cyan">{t({ es: 'construidos', en: 'built' })}</span>{' '}
+              {t({ es: 'y públicos.', en: 'and public.' })}
             </h2>
           </div>
           <p className="max-w-[42ch] text-lg leading-relaxed text-body">
-            Todo el código está abierto. Cada uno resuelve un problema distinto y el stack se
-            eligió por el problema, no por costumbre.
+            {t({
+              es: 'Todo el código está abierto. Cada uno resuelve un problema distinto y el stack se eligió por el problema, no por costumbre.',
+              en: 'All the code is open. Each one solves a different problem, and the stack was chosen for the problem, not out of habit.',
+            })}
           </p>
         </div>
 
@@ -330,7 +357,7 @@ const Projects = () => {
 
         <div className="mt-24 flex items-center gap-4 lg:mt-32">
           <p className="section-eyebrow shrink-0">
-            <span className="text-cyan">{'// '}</span>más proyectos
+            <span className="text-cyan">{'// '}</span>{t({ es: 'más proyectos', en: 'more projects' })}
           </p>
           <span className="h-px flex-1 bg-hairline" aria-hidden="true" />
         </div>
@@ -357,7 +384,7 @@ const Projects = () => {
       <Cubi
         visible={inView}
         mood={current ? 'happy' : 'idle'}
-        message={current?.buddy ?? '¡Hola! Soy Cubi. Te cuento de cada proyecto 👀'}
+        message={t(current?.buddy ?? { es: '¡Hola! Soy Cubi. Te cuento de cada proyecto 👀', en: "Hi! I'm Cubi. I'll tell you about each project 👀" })}
       />
     </section>
   );

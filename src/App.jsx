@@ -6,8 +6,10 @@ import Stack from './components/Stack';
 import About from './components/About';
 import Education from './components/Education';
 import Contact from './components/Contact';
+import { useLang } from './i18n';
 
 function App() {
+  const { t } = useLang();
   // Pausa las animaciones en bucle de las secciones que no están en pantalla.
   // Usa un atributo (no className) para no pelear con React; el CSS está en index.css.
   useEffect(() => {
@@ -30,7 +32,7 @@ function App() {
         href="#home"
         className="sr-only focus:not-sr-only focus:absolute focus:left-6 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-violet focus:px-4 focus:py-2 focus:text-white"
       >
-        Saltar al contenido
+        {t({ es: 'Saltar al contenido', en: 'Skip to content' })}
       </a>
       <Navbar />
       <main>

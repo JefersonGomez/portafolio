@@ -1,15 +1,18 @@
 import { personalInfo, education } from '../data/portfolioData';
+import { useLang } from '../i18n';
 
 // El retrato va en círculo, dentro de un anillo de gradiente que gira despacio.
 // Sin filtros de color sobre la foto: es una persona, no un elemento del sistema.
 
 const facts = [
   { label: 'base', value: personalInfo.location },
-  { label: 'estudio', value: education.degree },
-  { label: 'enfoque', value: 'Backend, APIs e IA aplicada' },
+  { label: { es: 'estudio', en: 'studies' }, value: education.degree },
+  { label: { es: 'enfoque', en: 'focus' }, value: { es: 'Backend, APIs e IA aplicada', en: 'Backend, APIs and applied AI' } },
 ];
 
-const About = () => (
+const About = () => {
+  const { t } = useLang();
+  return (
   <section id="about" className="relative overflow-hidden border-t border-hairline">
     {/* Halo detrás del retrato, mismo lenguaje que el hero */}
     <div
@@ -32,7 +35,7 @@ const About = () => (
                 src={personalInfo.photo}
                 width={personalInfo.photoWidth}
                 height={personalInfo.photoHeight}
-                alt={`Retrato de ${personalInfo.name}`}
+                alt={`${t({ es: 'Retrato de', en: 'Portrait of' })} ${personalInfo.name}`}
                 loading="lazy"
                 decoding="async"
                 className="h-full w-full scale-[1.35] object-cover object-[50%_32%] transition-transform duration-700 ease-prospectus hover:scale-[1.42]"
@@ -57,36 +60,37 @@ const About = () => (
         {/* Texto */}
         <div className="lg:col-span-7">
           <p className="section-eyebrow">
-            <span className="text-cyan">{'// '}</span>sobre mí
+            <span className="text-cyan">{'// '}</span>{t({ es: 'sobre mí', en: 'about me' })}
           </p>
 
           <h2 className="section-title mt-4 max-w-[16ch]">
-            Lo que no se ve es lo que tiene que <span className="text-cyan">aguantar.</span>
+            {t({ es: 'Lo que no se ve es lo que tiene que', en: "What you don't see is what has to" })}{' '}
+            <span className="text-cyan">{t({ es: 'aguantar.', en: 'hold up.' })}</span>
           </h2>
 
           <div className="mt-8 flex max-w-[58ch] flex-col gap-6 text-lg leading-relaxed text-body">
             <p>
-              Trabajo del lado del servidor: APIs, modelado de datos, autenticación y la
-              infraestructura que las sostiene. Me interesa la arquitectura más que la función
-              suelta — cómo se ordenan las piezas para que el sistema siga siendo entendible
-              cuando crece y para que otro pueda leerlo sin que nadie se lo explique.
+              {t({
+                es: 'Trabajo del lado del servidor: APIs, modelado de datos, autenticación y la infraestructura que las sostiene. Me interesa la arquitectura más que la función suelta — cómo se ordenan las piezas para que el sistema siga siendo entendible cuando crece y para que otro pueda leerlo sin que nadie se lo explique.',
+                en: 'I work on the server side: APIs, data modeling, authentication and the infrastructure behind them. I care more about architecture than about any single function — how the pieces fit so the system stays understandable as it grows, and so someone else can read it without needing it explained.',
+              })}
             </p>
             <p>
-              Construyo soluciones para problemas concretos, no ejercicios de práctica. Un
-              problema real impone requisitos que ningún tutorial pone enfrente: datos sucios,
-              permisos, estados imprevistos y alguien esperando que funcione. Por eso todo lo
-              que muestro acá está terminado, público y andando.
+              {t({
+                es: 'Construyo soluciones para problemas concretos, no ejercicios de práctica. Un problema real impone requisitos que ningún tutorial pone enfrente: datos sucios, permisos, estados imprevistos y alguien esperando que funcione. Por eso todo lo que muestro acá está terminado, público y andando.',
+                en: "I build solutions for concrete problems, not practice exercises. A real problem brings requirements no tutorial shows you: messy data, permissions, unexpected states and someone waiting for it to work. That's why everything I show here is finished, public and running.",
+              })}
             </p>
           </div>
 
           <dl className="mt-10 grid gap-px overflow-hidden rounded-xl border border-hairline bg-hairline sm:grid-cols-3">
             {facts.map((fact) => (
-              <div key={fact.label} className="bg-surface/70 px-5 py-4">
+              <div key={t(fact.label)} className="bg-surface/70 px-5 py-4">
                 <dt className="font-mono text-xs text-muted">
                   <span className="text-cyan">{'// '}</span>
-                  {fact.label}
+                  {t(fact.label)}
                 </dt>
-                <dd className="mt-1.5 text-[0.9375rem] leading-snug text-ink">{fact.value}</dd>
+                <dd className="mt-1.5 text-[0.9375rem] leading-snug text-ink">{t(fact.value)}</dd>
               </div>
             ))}
           </dl>
@@ -94,6 +98,7 @@ const About = () => (
       </div>
     </div>
   </section>
-);
+  );
+};
 
 export default About;
